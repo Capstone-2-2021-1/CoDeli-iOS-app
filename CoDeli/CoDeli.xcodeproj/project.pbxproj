@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		679F03022621CBDE00FD0223 /* CoDeliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03012621CBDE00FD0223 /* CoDeliApp.swift */; };
-		679F03042621CBDE00FD0223 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03032621CBDE00FD0223 /* ContentView.swift */; };
+		679F03042621CBDE00FD0223 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03032621CBDE00FD0223 /* SignInView.swift */; };
 		679F03062621CBEB00FD0223 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 679F03052621CBEB00FD0223 /* Assets.xcassets */; };
 		679F03092621CBEB00FD0223 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 679F03082621CBEB00FD0223 /* Preview Assets.xcassets */; };
 		679F03142621CBF300FD0223 /* CoDeliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03132621CBF300FD0223 /* CoDeliTests.swift */; };
 		679F031F2621CBF400FD0223 /* CoDeliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F031E2621CBF400FD0223 /* CoDeliUITests.swift */; };
+		67CCCAA826220696008DF161 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAA726220696008DF161 /* SignUpView.swift */; };
+		67CCCAAD262206A8008DF161 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAAC262206A8008DF161 /* HomeView.swift */; };
+		67CCCAB2262206B9008DF161 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAB1262206B9008DF161 /* ChatView.swift */; };
+		67CCCAB7262206C5008DF161 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAB6262206C5008DF161 /* MyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +39,7 @@
 /* Begin PBXFileReference section */
 		679F02FE2621CBDE00FD0223 /* CoDeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoDeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		679F03012621CBDE00FD0223 /* CoDeliApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoDeliApp.swift; sourceTree = "<group>"; };
-		679F03032621CBDE00FD0223 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		679F03032621CBDE00FD0223 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		679F03052621CBEB00FD0223 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		679F03082621CBEB00FD0223 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		679F030A2621CBEB00FD0223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +49,10 @@
 		679F031A2621CBF400FD0223 /* CoDeliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoDeliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		679F031E2621CBF400FD0223 /* CoDeliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoDeliUITests.swift; sourceTree = "<group>"; };
 		679F03202621CBF400FD0223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67CCCAA726220696008DF161 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		67CCCAAC262206A8008DF161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		67CCCAB1262206B9008DF161 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		67CCCAB6262206C5008DF161 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				679F03012621CBDE00FD0223 /* CoDeliApp.swift */,
-				679F03032621CBDE00FD0223 /* ContentView.swift */,
+				67CCCA7C262201ED008DF161 /* Views */,
+				67CCCA7D2622020B008DF161 /* Model */,
 				679F03052621CBEB00FD0223 /* Assets.xcassets */,
 				679F030A2621CBEB00FD0223 /* Info.plist */,
 				679F03072621CBEB00FD0223 /* Preview Content */,
@@ -128,6 +137,25 @@
 				679F03202621CBF400FD0223 /* Info.plist */,
 			);
 			path = CoDeliUITests;
+			sourceTree = "<group>";
+		};
+		67CCCA7C262201ED008DF161 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				679F03032621CBDE00FD0223 /* SignInView.swift */,
+				67CCCAA726220696008DF161 /* SignUpView.swift */,
+				67CCCAAC262206A8008DF161 /* HomeView.swift */,
+				67CCCAB1262206B9008DF161 /* ChatView.swift */,
+				67CCCAB6262206C5008DF161 /* MyView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		67CCCA7D2622020B008DF161 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +287,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				679F03042621CBDE00FD0223 /* ContentView.swift in Sources */,
+				67CCCAB7262206C5008DF161 /* MyView.swift in Sources */,
+				679F03042621CBDE00FD0223 /* SignInView.swift in Sources */,
+				67CCCAAD262206A8008DF161 /* HomeView.swift in Sources */,
+				67CCCAB2262206B9008DF161 /* ChatView.swift in Sources */,
+				67CCCAA826220696008DF161 /* SignUpView.swift in Sources */,
 				679F03022621CBDE00FD0223 /* CoDeliApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
