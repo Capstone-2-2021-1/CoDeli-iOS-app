@@ -12,9 +12,9 @@ struct MakeRoomView: View {
     @State private var deliveryApp: String = ""
     @State private var deliveryAddress: String = ""
     @State private var deliveryDetailAddress: String = ""
-    @State private var minOrderAmount: String = ""
-    @State private var deliveryCost: String = ""
-    @State private var participantsNum: UInt8 = 0
+    @State private var minOrderAmount: UInt = 0
+    @State private var deliveryCost: UInt = 0
+    @State private var participantsNum: UInt = 0
 
     @State private var isEditing = false
 
@@ -68,7 +68,8 @@ struct MakeRoomView: View {
                 Section(header: Text("최소주문금액")) {
                     TextField(
                         "12000",
-                        text: $minOrderAmount
+                        value: $minOrderAmount,
+                        formatter: NumberFormatter()
                     ) { isEditing in
                         self.isEditing = isEditing
                     } onCommit: {
@@ -78,7 +79,8 @@ struct MakeRoomView: View {
                 Section(header: Text("배달비")) {
                     TextField(
                         "3000",
-                        text: $deliveryCost
+                        value: $deliveryCost,
+                        formatter: NumberFormatter()
                     ) { isEditing in
                         self.isEditing = isEditing
                     } onCommit: {
