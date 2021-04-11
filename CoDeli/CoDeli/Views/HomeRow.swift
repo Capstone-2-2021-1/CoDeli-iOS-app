@@ -16,7 +16,7 @@ struct HomeRow: View {
             spacing: 5
         ) {
             Text(room.restaurant)
-            ProgressView(value: /*@START_MENU_TOKEN@*/0.5/*@END_MENU_TOKEN@*/)
+            ProgressView(value: Double(room.currentValue) / Double(room.minOrderAmount))
                 .progressViewStyle(DefaultProgressViewStyle())
             Text("\(room.currentValue)")
             Text("\(room.minOrderAmount)원 (배달팁: \(room.deliveryCost)원)")
