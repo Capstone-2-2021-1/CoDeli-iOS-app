@@ -10,9 +10,8 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         NavigationView {
-            List {
-                HomeRow(room: rooms[0])
-                HomeRow(room: rooms[1])
+            List(rooms) { room in
+                HomeRow(room: room)
             }
             
             .navigationBarTitle("서울 동작구 흑석로 84", displayMode: .inline)
