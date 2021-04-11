@@ -12,6 +12,10 @@ struct MyView: View {
         NavigationView {
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
                 .navigationBarTitle("설정", displayMode: .large)
+                .onAppear() {
+                    UINavigationBarAppearance()
+                        .setColor(title: .white, background: UIColor(Color(hex: 0x008BBA, alpha: 0.7)))
+                }
         }
     }
 }
