@@ -23,6 +23,7 @@ struct MainView: View {
                     Label("마이", systemImage: "person.fill")
                 }
         }
+        .accentColor(Color(hex: 0x4caece))
     }
 }
 
