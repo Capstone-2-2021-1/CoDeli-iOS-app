@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+struct ProfileImage: View {
+    var body: some View {
+            Image("profile")
+                .resizable()
+                .frame(width: 70, height: 70)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                .shadow(radius: 5)
+    }
+}
+
 struct MyView: View {
     // 나중에 Firebase에서 정보 가져와서 동기화시킬 것임
     @State private var profileName: String = "제인"
@@ -20,10 +31,8 @@ struct MyView: View {
         NavigationView {
             Form {
                 Section(header: Text("프로필")) {
-                    HStack {
-                        Image("profile")
-                            .resizable()
-                            .frame(width: 70, height: 70)
+                    HStack(spacing: 15) {
+                        ProfileImage()
                         Text("\(profileName)")
                     }
                 }
