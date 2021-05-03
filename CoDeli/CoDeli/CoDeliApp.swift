@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct CoDeliApp: App {
+    @StateObject private var modelData = ModelData()
+
     var body: some Scene {
         WindowGroup {
 //            SignInView()
             MainView()
+                .environmentObject(modelData)
         }
     }
 }

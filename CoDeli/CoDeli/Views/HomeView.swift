@@ -9,14 +9,15 @@ import SwiftUI
 
 struct MakeRoomFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var modelData: ModelData
 
     @State private var restaurant: String = ""
     @State private var deliveryApp: String = ""
     @State private var deliveryAddress: String = ""
     @State private var deliveryDetailAddress: String = ""
-    @State private var minOrderAmount: UInt = 0
-    @State private var deliveryCost: UInt = 0
-    @State private var participantsNum: UInt = 0
+    @State private var minOrderAmount: String = ""
+    @State private var deliveryCost: String = ""
+    @State private var participantsMax: UInt = 0
 
     @State private var isEditing = false
 
@@ -70,28 +71,32 @@ struct MakeRoomFullScreenModalView: View {
                 Section(header: Text("최소주문금액")) {
                     TextField(
                         "12000",
-                        value: $minOrderAmount,
-                        formatter: NumberFormatter()
+                        text: $minOrderAmount
+//                        value: $minOrderAmount,
+//                        formatter: formatter
                     ) { isEditing in
                         self.isEditing = isEditing
                     } onCommit: {
             //            validate(name: username)
                     }
+                    .keyboardType(.numberPad)
                 }
                 Section(header: Text("배달비")) {
                     TextField(
                         "3000",
-                        value: $deliveryCost,
-                        formatter: NumberFormatter()
+                        text: $deliveryCost
+//                        value: $deliveryCost,
+//                        formatter: formatter
                     ) { isEditing in
                         self.isEditing = isEditing
                     } onCommit: {
             //            validate(name: username)
                     }
+                    .keyboardType(.numberPad)
                 }
                 Section(header: Text("모집 인원")) {
-                    Stepper(value: $participantsNum, in: 0...5) {
-                        Text("\(participantsNum)")
+                    Stepper(value: $participantsMax, in: 0...5) {
+                        Text("\(participantsMax)")
                     }
                 }
             }
@@ -109,7 +114,9 @@ struct MakeRoomFullScreenModalView: View {
                 trailing:
                     Button("완료") {
                         print("완료 버튼 눌림!")
+                        modelData.rooms.append(Room(id: modelData.rooms.count, restaurant: restaurant, currentValue: 0, minOrderAmount: UInt(minOrderAmount)!, deliveryCost: UInt(deliveryCost)!, deriveryAddress: deliveryAddress, deriveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax))
                         presentationMode.wrappedValue.dismiss()
+                        print(modelData.rooms)
                     }
                     .foregroundColor(.white)
             )
@@ -123,12 +130,14 @@ struct MakeRoomFullScreenModalView: View {
 
 
 struct HomeView: View {
+    @EnvironmentObject var modelData: ModelData
+
     @State private var showingSheet = false
 
     var body: some View {
         NavigationView {
             ZStack {
-                List(rooms) { room in
+                List(modelData.rooms) { room in
                     HomeRow(room: room)
                 }
 
@@ -146,11 +155,11 @@ struct HomeView: View {
                         .fullScreenCover(isPresented: $showingSheet) {
                             MakeRoomFullScreenModalView()
                         }
-                        .shadow(color: Color/*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/.opacity(0.3), radius: 3, x: 3, y: 3)
+                        .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
                     }
                 }
             }
-            
+
             .navigationBarTitle("서울 동작구 흑석로 84", displayMode: .inline)
             .navigationBarItems(
                 trailing:
@@ -172,5 +181,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(ModelData())
     }
 }
