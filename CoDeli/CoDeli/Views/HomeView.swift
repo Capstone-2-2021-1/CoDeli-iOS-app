@@ -114,7 +114,7 @@ struct MakeRoomFullScreenModalView: View {
                 trailing:
                     Button("완료") {
                         print("완료 버튼 눌림!")
-                        modelData.rooms.append(Room(id: modelData.rooms.count, restaurant: restaurant, currentValue: 0, minOrderAmount: UInt(minOrderAmount)!, deliveryCost: UInt(deliveryCost)!, deriveryAddress: deliveryAddress, deriveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax))
+                        modelData.rooms.append(Room(id: modelData.rooms.count, restaurant: restaurant, currentValue: 0, minOrderAmount: UInt(minOrderAmount)!, deliveryCost: UInt(deliveryCost)!, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax))
                         presentationMode.wrappedValue.dismiss()
                         print(modelData.rooms)
                     }
@@ -148,6 +148,7 @@ struct HomeView: View {
                         Spacer()
                         Button(action: {
                             print("방 만들기 버튼 눌림")
+                            print(modelData.rooms)
                             showingSheet.toggle()
                         }) {
                             Image("makeRoomButton")
@@ -171,6 +172,7 @@ struct HomeView: View {
                     .foregroundColor(.white)
             )
             .onAppear() {
+                self.modelData.fetchData()
                 UINavigationBarAppearance()
                     .setColor(title: .white, background: UIColor(Color(hex: 0x4caece)))
             }

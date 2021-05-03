@@ -7,15 +7,35 @@
 
 import Foundation
 import Combine
+import FirebaseFirestore
 
 final class ModelData: ObservableObject {
-    @Published var rooms: [Room] =
-        [Room(id: 0, restaurant: "맘스터치 중앙대점", currentValue: 9100, minOrderAmount: 12000, deliveryCost: 3000, deriveryAddress: "서울 동작구 흑석로84", deriveryDetailAddress: "중앙대학교 309관", participantsNum: 2, participantsMax: 3),
-         Room(id: 1, restaurant: "사현스낵", currentValue: 6000, minOrderAmount: 13000, deliveryCost: 2900, deriveryAddress: "서울 동작구 흑석로84", deriveryDetailAddress: "중앙대학교 310관", participantsNum: 1, participantsMax: 3),
-         Room(id: 2, restaurant: "진상천 본점", currentValue: 7000, minOrderAmount: 10000, deliveryCost: 2500, deriveryAddress: "서울 동작구 흑석로24-1", deriveryDetailAddress: "CU 중대후문점", participantsNum: 1, participantsMax: 2),
-         Room(id: 3, restaurant: "초밥집입니다", currentValue: 10900, minOrderAmount: 15000, deliveryCost: 100, deriveryAddress: "서울 동작구 흑석로84", deriveryDetailAddress: "중앙대학교 정문", participantsNum: 1, participantsMax: 2),
-         Room(id: 4, restaurant: "스쿨푸드 딜리버리 서울대입구역점", currentValue: 7500, minOrderAmount: 12000, deliveryCost: 2500, deriveryAddress: "서울 동작구 양녕로 280-1", deriveryDetailAddress: "CU 상도터널점", participantsNum: 2, participantsMax: 3)]
+    @Published var rooms = [Room]()
 
+    private var db = Firestore.firestore()
+
+    func fetchData() {
+        db.collection("Rooms").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+
+            self.rooms = documents.map { (queryDocumentSnapshot) -> Room in
+                let data = queryDocumentSnapshot.data()
+                let id = queryDocumentSnapshot.documentID
+                let restaurant = data["restaurant"] as? String ?? ""
+                let currentValue = data["currentValue"] as? UInt ?? 0
+                let minOrderAmount = data["minOrderAmount"] as? UInt ?? 0
+                let deliveryCost = data["deliveryCost"] as? UInt ?? 0
+                let deliveryAddress = data["deliveryAddress"] as? String ?? ""
+                let deliveryDetailAddress = data["deliveryDetailAddress"] as? String ?? ""
+                let participantsNum = data["participantsNum"] as? UInt ?? 0
+                let participantsMax = data["participantsMax"] as? UInt ?? 0
+                return Room(id: Int(id) ?? 0, restaurant: restaurant, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax)
+            }
+        }
+    }
 }
 
 struct Room: Hashable, Codable, Identifiable {
@@ -24,8 +44,8 @@ struct Room: Hashable, Codable, Identifiable {
     var currentValue: UInt
     var minOrderAmount: UInt
     var deliveryCost: UInt
-    var deriveryAddress: String
-    var deriveryDetailAddress: String
+    var deliveryAddress: String
+    var deliveryDetailAddress: String
     var participantsNum: UInt
     var participantsMax: UInt
 }

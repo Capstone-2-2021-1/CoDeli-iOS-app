@@ -21,7 +21,7 @@ struct HomeRow: View {
             Text("\(room.currentValue)")
             Text("\(room.minOrderAmount)원 (배달팁: \(room.deliveryCost)원)")
             HStack {
-                Text("\(room.deriveryAddress) \(room.deriveryDetailAddress)")
+                Text("\(room.deliveryAddress) \(room.deliveryDetailAddress)")
                 Spacer()
                 Text("\(room.participantsNum)/\(room.participantsMax)")
             }
@@ -31,7 +31,7 @@ struct HomeRow: View {
 
 struct HomeRow_Previews: PreviewProvider {
     static var rooms = ModelData().rooms
-    
+
     static var previews: some View {
         HomeRow(room: rooms[0])
     }
