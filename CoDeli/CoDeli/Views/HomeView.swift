@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct MakeRoomFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var modelData: ModelData
+    private var db = Firestore.firestore()
 
     @State private var restaurant: String = ""
     @State private var deliveryApp: String = ""
@@ -114,7 +116,24 @@ struct MakeRoomFullScreenModalView: View {
                 trailing:
                     Button("완료") {
                         print("완료 버튼 눌림!")
-                        modelData.rooms.append(Room(id: modelData.rooms.count, restaurant: restaurant, currentValue: 0, minOrderAmount: UInt(minOrderAmount)!, deliveryCost: UInt(deliveryCost)!, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax))
+
+                        db.collection("Rooms").document(String(modelData.rooms.count)).setData([
+                            "restaurant": restaurant,
+                            "currentValue": 0,
+                            "minOrderAmount": UInt(minOrderAmount) ?? 0,
+                            "deliveryCost": UInt(deliveryCost) ?? 0,
+                            "deliveryAddress": deliveryAddress,
+                            "deliveryDetailAddress": deliveryDetailAddress,
+                            "participantsNum": 1,
+                            "participantsMax": participantsMax
+                        ]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                print("Document successfully written!")
+                            }
+                        }
+
                         presentationMode.wrappedValue.dismiss()
                         print(modelData.rooms)
                     }
@@ -142,7 +161,7 @@ struct HomeView: View {
                 }
 
                 VStack {
-                    Spacer()    // minLength?
+                    Spacer()
 
                     HStack {
                         Spacer()

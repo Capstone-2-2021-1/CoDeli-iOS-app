@@ -20,6 +20,9 @@
 		679F03092621CBEB00FD0223 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 679F03082621CBEB00FD0223 /* Preview Assets.xcassets */; };
 		679F03142621CBF300FD0223 /* CoDeliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03132621CBF300FD0223 /* CoDeliTests.swift */; };
 		679F031F2621CBF400FD0223 /* CoDeliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F031E2621CBF400FD0223 /* CoDeliUITests.swift */; };
+		67C684A726403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
+		67C684A826403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
+		67C684A926403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
 		67CCCAA826220696008DF161 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAA726220696008DF161 /* SignUpView.swift */; };
 		67CCCAAD262206A8008DF161 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAAC262206A8008DF161 /* HomeView.swift */; };
 		67CCCAB2262206B9008DF161 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CCCAB1262206B9008DF161 /* ChatView.swift */; };
@@ -63,6 +66,7 @@
 		679F031A2621CBF400FD0223 /* CoDeliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoDeliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		679F031E2621CBF400FD0223 /* CoDeliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoDeliUITests.swift; sourceTree = "<group>"; };
 		679F03202621CBF400FD0223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67C684A626403FA200041068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67CCCAA726220696008DF161 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		67CCCAAC262206A8008DF161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		67CCCAB1262206B9008DF161 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				67CCCA7D2622020B008DF161 /* Model */,
 				679F03052621CBEB00FD0223 /* Assets.xcassets */,
 				679F030A2621CBEB00FD0223 /* Info.plist */,
+				67C684A626403FA200041068 /* GoogleService-Info.plist */,
 				679F03072621CBEB00FD0223 /* Preview Content */,
 			);
 			path = CoDeli;
@@ -323,6 +328,7 @@
 			files = (
 				679F03092621CBEB00FD0223 /* Preview Assets.xcassets in Resources */,
 				679F03062621CBEB00FD0223 /* Assets.xcassets in Resources */,
+				67C684A726403FA200041068 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67C684A826403FA200041068 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +344,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67C684A926403FA200041068 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
