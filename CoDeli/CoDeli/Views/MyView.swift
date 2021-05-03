@@ -61,7 +61,7 @@ struct MyView: View {
             )
             .onAppear() {
                 UINavigationBarAppearance()
-                    .setColor(title: .white, background: UIColor(Color(hex: 0x008BBA, alpha: 0.7)))
+                    .setColor(title: .white, background: UIColor(Color(hex: 0x4caece)))
             }
         }
     }

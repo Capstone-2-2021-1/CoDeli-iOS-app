@@ -55,7 +55,7 @@ struct MakeRoomFullScreenModalView: View {
                         .padding(.vertical, 7)
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .fill(Color(hex: 0xFFC618, alpha: 0.7)))
+                                .fill(Color(hex: 0xf6cd53)))
                         .foregroundColor(.white)
                     }
 
@@ -122,7 +122,7 @@ struct MakeRoomFullScreenModalView: View {
             )
             .onAppear() {
                 UINavigationBarAppearance()
-                    .setColor(title: .white, background: UIColor(Color(hex: 0xFFC618, alpha: 0.7)))
+                    .setColor(title: .white, background: UIColor(Color(hex: 0xf6cd53)))
             }
         }
     }
@@ -172,7 +172,7 @@ struct HomeView: View {
             )
             .onAppear() {
                 UINavigationBarAppearance()
-                    .setColor(title: .white, background: UIColor(Color(hex: 0x008BBA, alpha: 0.7)))
+                    .setColor(title: .white, background: UIColor(Color(hex: 0x4caece)))
             }
         }
     }
