@@ -25,6 +25,7 @@ final class ModelData: ObservableObject {
                 let data = queryDocumentSnapshot.data()
                 let id = queryDocumentSnapshot.documentID
                 let restaurant = data["restaurant"] as? String ?? ""
+                let deliveryApp = data["deliveryApp"] as? String ?? ""
                 let currentValue = data["currentValue"] as? UInt ?? 0
                 let minOrderAmount = data["minOrderAmount"] as? UInt ?? 0
                 let deliveryCost = data["deliveryCost"] as? UInt ?? 0
@@ -32,7 +33,7 @@ final class ModelData: ObservableObject {
                 let deliveryDetailAddress = data["deliveryDetailAddress"] as? String ?? ""
                 let participantsNum = data["participantsNum"] as? UInt ?? 0
                 let participantsMax = data["participantsMax"] as? UInt ?? 0
-                return Room(id: Int(id) ?? 0, restaurant: restaurant, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax)
+                return Room(id: Int(id) ?? 0, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax)
             }
         }
     }
@@ -41,6 +42,7 @@ final class ModelData: ObservableObject {
 struct Room: Hashable, Codable, Identifiable {
     var id: Int
     var restaurant: String
+    var deliveryApp: String
     var currentValue: UInt
     var minOrderAmount: UInt
     var deliveryCost: UInt

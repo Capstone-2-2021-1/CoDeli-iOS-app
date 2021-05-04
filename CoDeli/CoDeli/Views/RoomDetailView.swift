@@ -36,7 +36,7 @@ struct RoomDetailView: View {
             .padding(5)
 
             VStack(alignment: .leading, spacing: 10, content: {
-                Text("사용 플랫폼: ")
+                Text("사용 플랫폼: \(room.deliveryApp)")
                 Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
                 Text("약속시간: ")
 

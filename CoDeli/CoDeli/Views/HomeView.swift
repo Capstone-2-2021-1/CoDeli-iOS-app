@@ -119,6 +119,7 @@ struct MakeRoomFullScreenModalView: View {
 
                         db.collection("Rooms").document(String(modelData.rooms.count)).setData([
                             "restaurant": restaurant,
+                            "deliveryApp": deliveryApp,
                             "currentValue": 0,
                             "minOrderAmount": UInt(minOrderAmount) ?? 0,
                             "deliveryCost": UInt(deliveryCost) ?? 0,
