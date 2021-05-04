@@ -17,10 +17,12 @@ struct ContentView: View {
     // 나중에 case 하나 더 만들어서 nickname, profileImage 설정하는 화면 만들기
 
     var body: some View {
-        if info.isSignIn == .success {
-            return AnyView(MainView())
-        } else {
-            return AnyView(SignInView())
-        }
+        // for debug - 로그인 생략
+        return AnyView(MainView())
+//        if info.isSignIn == .success {
+//            return AnyView(MainView())
+//        } else {
+//            return AnyView(SignInView())
+//        }
     }
 }

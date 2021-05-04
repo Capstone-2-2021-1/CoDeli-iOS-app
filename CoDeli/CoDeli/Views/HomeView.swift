@@ -157,7 +157,9 @@ struct HomeView: View {
         NavigationView {
             ZStack {
                 List(modelData.rooms) { room in
-                    HomeRow(room: room)
+                    NavigationLink(destination: RoomDetailView(room: room)) {
+                        HomeRow(room: room)
+                    }
                 }
 
                 VStack {
@@ -179,7 +181,6 @@ struct HomeView: View {
                     }
                 }
             }
-
             .navigationBarTitle("서울 동작구 흑석로 84", displayMode: .inline)
             .navigationBarItems(
                 trailing:
