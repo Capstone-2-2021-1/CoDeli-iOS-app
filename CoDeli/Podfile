@@ -8,9 +8,15 @@ target 'CoDeli' do
   platform :ios, '14.4'
 
   # Pods for CoDeli
+  # pod 'FirebaseUI/Google'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
+
+  pod 'Firebase/Database'
 
   target 'CoDeliTests' do
     inherit! :search_paths
