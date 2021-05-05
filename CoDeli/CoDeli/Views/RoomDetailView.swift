@@ -14,7 +14,11 @@ struct RoomDetailView: View {
     var room: Room
 
     @State private var isReady: Bool = false
+
     @State private var status: Bool = false
+    @State private var menuName: String = ""
+    @State private var menuPrice: String = ""
+
     @State private var message: String = ""
 
     var body: some View {
@@ -32,6 +36,18 @@ struct RoomDetailView: View {
                 Button(isReady ? "취소" : "준비") {
                     isReady = isReady ? false : true // flip
                     status = isReady ? true : false
+
+                    var ref: DatabaseReference!
+                    ref = Database.database().reference()
+                    ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").setValue(
+                        ["id": realtimeData.myInfo.nickname,
+                         "menu_name": menuName,
+                         "menu_price": UInt(menuPrice) ?? 0,    // 위험..
+                         "status": status]
+                    )
+
+                    hideKeyboard()
+
                     print("준비 버튼 눌림")
                 }
                 .frame(width: 80, height: 80)
@@ -48,11 +64,39 @@ struct RoomDetailView: View {
                 Text("사용 플랫폼: \(room.deliveryApp)")
                 Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
                 Text("약속시간: ")
-
             })
+            .font(.subheadline)
             .padding(5)
 
-            ParticipantsView(status: $status)
+            // 내 메뉴 이름, 가격 입력 받음
+
+            VStack {
+                HStack {
+                    if status {
+                        Circle()
+                            .frame(width: 5, height: 5)
+                            .foregroundColor(.green)
+                    } else {
+                        Circle()
+                            .frame(width: 5, height: 5)
+                            .foregroundColor(.red)
+                    }
+                    Text(realtimeData.myInfo.nickname)
+                    TextField(
+                        "메뉴 이름",
+                        text: $menuName
+                    )
+                    TextField(
+                        "메뉴 가격",
+                        text: $menuPrice
+                    )
+                }
+                .padding(.leading)
+                .padding(.trailing)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                ParticipantsView()
+            }
 
             MessageView()
 //            ScrollView {
@@ -101,3 +145,11 @@ struct RoomDetailView_Previews: PreviewProvider {
             .environmentObject(RealtimeData())
     }
 }
+
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif

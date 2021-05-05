@@ -32,16 +32,7 @@ final class RealtimeData: ObservableObject {
 
             let dict = snapshot.value as? [String : AnyObject] ?? [:]
             for (person, info) in dict {
-
                 let infoDict = info as? [String: AnyObject] ?? [:]
-
-//                // 이미 참가한 사람이 메뉴 이름, 가격을 수정할 때는 추가가 아닌 갱신
-//                for each in self.participants { // participants를 Dictionary로 만들면 for문 필요x
-//                    if person == each.id {
-//
-//                    }
-//                }
-
                 self.participants.append(
                     Participant(id: infoDict["id"] as? String ?? "",
                                 menuName: infoDict["menu_name"] as? String ?? "",
@@ -49,6 +40,16 @@ final class RealtimeData: ObservableObject {
                                 status: infoDict["status"] as? Bool ?? false)
                 )
                 print(self.participants)
+            }
+
+            // 본인의 주문 정보는 제외함.
+            var i = 0
+            for each in self.participants {
+                if self.myInfo.nickname == each.id {
+                    self.participants.remove(at: i)
+                    break
+                }
+                i += 1
             }
 
 //            for child in snapshot.children {
