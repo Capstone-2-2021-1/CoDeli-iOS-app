@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct ParticipantsView: View {
+//    @ObservedObject var info: RealtimeData
+
+    @State private var menuName: String = ""
+    @State private var menuPrice: String = ""
+
     var body: some View {
-        Text("Participants")
+        HStack {
+//            Text()
+            TextField(
+                "메뉴 이름",
+                text: $menuName
+            )
+            TextField(
+                "메뉴 가격",
+                text: $menuPrice
+            )
+        }
+        .textFieldStyle(RoundedBorderTextFieldStyle())
     }
 }
 
