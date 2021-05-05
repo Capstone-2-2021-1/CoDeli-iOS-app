@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct MessageView: View {
+    @EnvironmentObject var realtimeData: RealtimeData
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(realtimeData.messages) { message in
+            MessageCell(message: message, isCurrentUser: message.isCurrentUser)
+        }
     }
 }
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
         MessageView()
+            .environmentObject(RealtimeData())
     }
 }

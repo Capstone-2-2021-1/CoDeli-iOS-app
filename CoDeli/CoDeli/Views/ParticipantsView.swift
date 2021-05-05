@@ -16,7 +16,7 @@ struct ParticipantsView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("나의 닉네임")
+                Text(realtimeData.myInfo.nickname)
                 TextField(
                     "메뉴 이름",
                     text: $menuName
@@ -26,6 +26,8 @@ struct ParticipantsView: View {
                     text: $menuPrice
                 )
             }
+            .padding(.leading)
+            .padding(.trailing)
             List(realtimeData.participants) { participant in
                 ParticipantRow(participant: participant)
             }

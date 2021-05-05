@@ -49,9 +49,10 @@ struct RoomDetailView: View {
 
             ParticipantsView()
 
-            ScrollView {
-                MessageView()
-            }
+            MessageView()
+//            ScrollView {
+//                MessageView()
+//            }
 
             ZStack {
                 HStack {
@@ -78,7 +79,6 @@ struct RoomDetailView: View {
                 .padding(5)
             }
             .background(Color(hex:0x4caece))
-
 
         })
         .navigationBarTitle(room.restaurant)

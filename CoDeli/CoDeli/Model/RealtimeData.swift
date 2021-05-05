@@ -12,6 +12,10 @@ import Firebase
 final class RealtimeData: ObservableObject {
     @Published var participants = [Participant]()
     @Published var messages = [Message]()
+    // dummy
+    @Published var myInfo = User(email: "sspog.lim@gmail.com",
+                                 name: "임창성",
+                                 nickname: "cslim")
 
     func fetchData(roomId: Int) {
         var ref: DatabaseReference!
@@ -24,6 +28,8 @@ final class RealtimeData: ObservableObject {
 
         // 방의 참가자 목록 가져오기
         ref.child("Chat/\(roomId)/partitions").observe(DataEventType.value, with: { (snapshot) in
+            self.participants = []
+
             let dict = snapshot.value as? [String : AnyObject] ?? [:]
             for (person, info) in dict {
 
@@ -36,7 +42,6 @@ final class RealtimeData: ObservableObject {
 //                    }
 //                }
 
-                self.participants = []
                 self.participants.append(
                     Participant(id: infoDict["id"] as? String ?? "",
                                 menuName: infoDict["menu_name"] as? String ?? "",
@@ -54,24 +59,36 @@ final class RealtimeData: ObservableObject {
         })
 
         // 방의 채팅 목록 가져오기
+//        DataEventType.value
         ref.child("Chat/\(roomId)/chat").observe(DataEventType.value, with: { (snapshot) in
+            self.messages = []
+
             let dict = snapshot.value as? [String : AnyObject] ?? [:]
             for (person, info) in dict {
 
                 let infoDict = info as? [String: AnyObject] ?? [:]
 
-                self.messages = []
+                // 현재 로그인된 사용자가 보낸 메시지인지 확인
+                let sender = infoDict["name"] as? String ?? ""
+                var isCurrentUser = false
+                if sender == self.myInfo.nickname {
+                    isCurrentUser = true
+                }
                 self.messages.append(
                     Message(id: person,
                                 message: infoDict["message"] as? String ?? "",
-                                name: infoDict["name"] as? String ?? "",
-                                time: infoDict["time"] as? String ?? "")
+                                name: sender,
+                                time: infoDict["time"] as? String ?? "",
+                                isCurrentUser: isCurrentUser)
                 )
                 print(self.messages)
             }
         })
-
     }
+
+//    func fetchUserData() {
+//
+//    }
 }
 
 struct Participant: Hashable, Codable, Identifiable {
@@ -86,4 +103,11 @@ struct Message: Hashable, Codable, Identifiable {
     var message: String
     var name: String
     var time: String
+    var isCurrentUser: Bool
+}
+
+struct User: Hashable, Codable {
+    var email: String
+    var name: String
+    var nickname: String
 }
