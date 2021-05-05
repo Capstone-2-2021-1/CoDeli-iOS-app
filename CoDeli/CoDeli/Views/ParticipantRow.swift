@@ -12,7 +12,16 @@ struct ParticipantRow: View {
 
     var body: some View {
         HStack {
-//            participant.status
+            if participant.status { // true
+                Circle()
+                    .frame(width: 5, height: 5)
+                    .foregroundColor(.green)
+            } else {
+                Circle()
+                    .frame(width: 5, height: 5)
+                    .foregroundColor(.red)
+            }
+
             Text(participant.id)
             Spacer()
             Text(participant.menuName)

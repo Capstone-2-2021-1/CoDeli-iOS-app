@@ -12,6 +12,9 @@ struct RoomDetailView: View {
     @EnvironmentObject var realtimeData: RealtimeData
 
     var room: Room
+
+    @State private var isReady: Bool = false
+    @State private var status: Bool = false
     @State private var message: String = ""
 
     var body: some View {
@@ -26,7 +29,9 @@ struct RoomDetailView: View {
                 .font(.system(size: 21, design: .rounded))
 
                 Spacer()
-                Button("준비") {
+                Button(isReady ? "취소" : "준비") {
+                    isReady = isReady ? false : true // flip
+                    status = isReady ? true : false
                     print("준비 버튼 눌림")
                 }
                 .frame(width: 80, height: 80)
@@ -47,7 +52,7 @@ struct RoomDetailView: View {
             })
             .padding(5)
 
-            ParticipantsView()
+            ParticipantsView(status: $status)
 
             MessageView()
 //            ScrollView {
