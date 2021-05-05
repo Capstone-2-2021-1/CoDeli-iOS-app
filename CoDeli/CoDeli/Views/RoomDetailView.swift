@@ -45,10 +45,7 @@ struct RoomDetailView: View {
                          "menu_price": UInt(menuPrice) ?? 0,    // 위험..
                          "status": status]
                     )
-
                     hideKeyboard()
-
-                    print("준비 버튼 눌림")
                 }
                 .frame(width: 80, height: 80)
                 .background(
@@ -114,6 +111,21 @@ struct RoomDetailView: View {
                     Spacer()
 
                     Button(action: {
+                        let date = Date()
+                        var calendar = Calendar.current
+                        let hour = calendar.component(.hour, from: date)
+                        let minute = calendar.component(.minute, from: date)
+                        let second = calendar.component(.second, from: date)
+
+                        var ref: DatabaseReference!
+                        ref = Database.database().reference()
+                        ref.child("Chat/\(room.id)/chat/\(realtimeData.myInfo.nickname)\(hour)\(minute)\(second)").setValue(
+                            ["message": message,
+                             "name": realtimeData.myInfo.nickname,
+                             "time": "\(hour):\(minute)"]
+                        )
+
+                        hideKeyboard()
                         print("메시지 보내기 버튼 눌림!")
                     }) {
                         Image(systemName: "paperplane")
