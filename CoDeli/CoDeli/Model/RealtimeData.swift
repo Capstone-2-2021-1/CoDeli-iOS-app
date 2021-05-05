@@ -26,7 +26,17 @@ final class RealtimeData: ObservableObject {
         ref.child("Chat/\(roomId)/partitions").observe(DataEventType.value, with: { (snapshot) in
             let dict = snapshot.value as? [String : AnyObject] ?? [:]
             for (person, info) in dict {
+
                 let infoDict = info as? [String: AnyObject] ?? [:]
+
+//                // 이미 참가한 사람이 메뉴 이름, 가격을 수정할 때는 추가가 아닌 갱신
+//                for each in self.participants { // participants를 Dictionary로 만들면 for문 필요x
+//                    if person == each.id {
+//
+//                    }
+//                }
+
+                self.participants = []
                 self.participants.append(
                     Participant(id: infoDict["id"] as? String ?? "",
                                 menuName: infoDict["menu_name"] as? String ?? "",
@@ -38,27 +48,8 @@ final class RealtimeData: ObservableObject {
 
 //            for child in snapshot.children {
 //                let snap = child as! DataSnapshot
-//
 //                print(snap.value as? [String : AnyObject] ?? [:])
-//                switch snap.key {
-//                case "id":
-//                    print(snap.value as! String)
-//                case "menu_name":
-//                    print(snap.value as! String)
-//                case "menu_price":
-//                    print(snap.value as! UInt)
-//                case "status":
-//                    print(snap.value as! UInt)
-//                default:
-//                    print("Realtime DB reading data error!")
-//                }
-
-//                participants.append(
-//                    Participant(id: s,
-//                                menu_name: snap.value[1]!,
-//                                menu_price: snap.value[2]!,
-//                                status: snap.value[3]!)
-//                )
+//
 //            }
         })
     }

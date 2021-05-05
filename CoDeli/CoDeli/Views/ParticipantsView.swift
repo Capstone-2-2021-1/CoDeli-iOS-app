@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct ParticipantsView: View {
-//    @ObservedObject var info: RealtimeData
+    @EnvironmentObject var realtimeData: RealtimeData
 
     @State private var menuName: String = ""
     @State private var menuPrice: String = ""
 
     var body: some View {
-        HStack {
-//            Text()
-            TextField(
-                "메뉴 이름",
-                text: $menuName
-            )
-            TextField(
-                "메뉴 가격",
-                text: $menuPrice
-            )
+        VStack {
+            HStack {
+                Text("나의 닉네임")
+                TextField(
+                    "메뉴 이름",
+                    text: $menuName
+                )
+                TextField(
+                    "메뉴 가격",
+                    text: $menuPrice
+                )
+            }
+            List(realtimeData.participants) { participant in
+                ParticipantRow(participant: participant)
+            }
         }
         .textFieldStyle(RoundedBorderTextFieldStyle())
     }
@@ -32,5 +37,6 @@ struct ParticipantsView: View {
 struct ParticipantsView_Previews: PreviewProvider {
     static var previews: some View {
         ParticipantsView()
+            .environmentObject(RealtimeData())
     }
 }

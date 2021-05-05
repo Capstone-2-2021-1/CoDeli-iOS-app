@@ -48,7 +48,6 @@ struct RoomDetailView: View {
             .padding(5)
 
             ParticipantsView()
-//            ParticipantsView(info: realtimeData)
 
             ScrollView {
                 MessageView()

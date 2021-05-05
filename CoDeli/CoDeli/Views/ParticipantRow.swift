@@ -8,13 +8,24 @@
 import SwiftUI
 
 struct ParticipantRow: View {
+    var participant: Participant
+
     var body: some View {
-        Text("Participants")
+        HStack {
+//            participant.status
+            Text(participant.id)
+            Spacer()
+            Text(participant.menuName)
+            Spacer()
+            Text(String(participant.menuPrice))
+        }
     }
 }
 
 struct ParticipantRow_Previews: PreviewProvider {
+    static var participants = RealtimeData().participants
+
     static var previews: some View {
-        ParticipantRow()
+        ParticipantRow(participant: participants[0])
     }
 }
