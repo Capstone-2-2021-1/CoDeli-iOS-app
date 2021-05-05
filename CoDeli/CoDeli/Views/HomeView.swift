@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 struct MakeRoomFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var firestoreData: FirestoreData
     private var db = Firestore.firestore()
 
     @State private var restaurant: String = ""
@@ -117,7 +117,7 @@ struct MakeRoomFullScreenModalView: View {
                     Button("완료") {
                         print("완료 버튼 눌림!")
 
-                        db.collection("Rooms").document(String(modelData.rooms.count)).setData([
+                        db.collection("Rooms").document(String(firestoreData.rooms.count)).setData([
                             "restaurant": restaurant,
                             "deliveryApp": deliveryApp,
                             "currentValue": 0,
@@ -136,7 +136,7 @@ struct MakeRoomFullScreenModalView: View {
                         }
 
                         presentationMode.wrappedValue.dismiss()
-                        print(modelData.rooms)
+                        print(firestoreData.rooms)
                     }
                     .foregroundColor(.white)
             )
@@ -150,14 +150,14 @@ struct MakeRoomFullScreenModalView: View {
 
 
 struct HomeView: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var firestoreData: FirestoreData
 
     @State private var showingSheet = false
 
     var body: some View {
         NavigationView {
             ZStack {
-                List(modelData.rooms) { room in
+                List(firestoreData.rooms) { room in
                     NavigationLink(destination: RoomDetailView(room: room)) {
                         HomeRow(room: room)
                     }
@@ -170,7 +170,7 @@ struct HomeView: View {
                         Spacer()
                         Button(action: {
                             print("방 만들기 버튼 눌림")
-                            print(modelData.rooms)
+                            print(firestoreData.rooms)
                             showingSheet.toggle()
                         }) {
                             Image("makeRoomButton")
@@ -193,7 +193,7 @@ struct HomeView: View {
                     .foregroundColor(.white)
             )
             .onAppear() {
-                self.modelData.fetchData()
+                self.firestoreData.fetchData()
                 UINavigationBarAppearance()
                     .setColor(title: .white, background: UIColor(Color(hex: 0x4caece)))
             }
@@ -204,6 +204,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(ModelData())
+            .environmentObject(FirestoreData())
     }
 }

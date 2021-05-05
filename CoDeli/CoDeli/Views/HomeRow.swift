@@ -30,7 +30,7 @@ struct HomeRow: View {
 }
 
 struct HomeRow_Previews: PreviewProvider {
-    static var rooms = ModelData().rooms
+    static var rooms = FirestoreData().rooms
 
     static var previews: some View {
         HomeRow(room: rooms[0])

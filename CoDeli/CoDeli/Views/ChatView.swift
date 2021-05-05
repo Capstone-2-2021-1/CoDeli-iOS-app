@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatView: View {
     var body: some View {
-        Text("ChatView")
+        Text("아직 참여한 방이 없습니다!")
     }
 }
 

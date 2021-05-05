@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct RoomDetailView: View {
+    @EnvironmentObject var realtimeData: RealtimeData
+
     var room: Room
+    @State private var message: String = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10, content: {
@@ -43,20 +47,52 @@ struct RoomDetailView: View {
             })
             .padding(5)
 
-            
+            ParticipantsView()
 
             ScrollView {
-                ChatView()
+                MessageView()
             }
+
+            ZStack {
+                HStack {
+                    TextField(
+                        "보낼 메시지를 입력하세요",
+                        text: $message
+                    )
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                    Spacer()
+
+                    Button(action: {
+                        print("메시지 보내기 버튼 눌림!")
+                    }) {
+                        Image(systemName: "paperplane")
+                    }
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color(hex:0x42c273))
+                    )
+                }
+                .padding(5)
+            }
+            .background(Color(hex:0x4caece))
+
+
         })
         .navigationBarTitle(room.restaurant)
+        .onAppear() {
+            self.realtimeData.fetchData(roomId: room.id)
+        }
     }
 }
 
 struct RoomDetailView_Previews: PreviewProvider {
-    static var rooms = ModelData().rooms
+    static var rooms = FirestoreData().rooms
 
     static var previews: some View {
         RoomDetailView(room: rooms[0])
+            .environmentObject(RealtimeData())
     }
 }

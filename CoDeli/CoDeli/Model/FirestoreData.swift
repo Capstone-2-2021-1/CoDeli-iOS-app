@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import FirebaseFirestore
 
-final class ModelData: ObservableObject {
+final class FirestoreData: ObservableObject {
     @Published var rooms = [Room]()
 
     private var db = Firestore.firestore()

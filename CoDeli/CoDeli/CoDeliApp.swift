@@ -11,7 +11,8 @@ import GoogleSignIn
 
 @main
 struct CoDeliApp: App {
-    @StateObject private var modelData = ModelData()
+    @StateObject private var firestoreData = FirestoreData()
+    @StateObject private var realtimeData = RealtimeData()
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
@@ -22,7 +23,8 @@ struct CoDeliApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(info: self.appDelegate)
-                .environmentObject(modelData)
+                .environmentObject(firestoreData)
+                .environmentObject(realtimeData)
         }
     }
 }
