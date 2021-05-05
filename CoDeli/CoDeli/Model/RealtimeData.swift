@@ -11,7 +11,7 @@ import Firebase
 
 final class RealtimeData: ObservableObject {
     @Published var participants = [Participant]()
-//    @Published var message = [Message]()
+    @Published var messages = [Message]()
 
     func fetchData(roomId: Int) {
         var ref: DatabaseReference!
@@ -52,6 +52,25 @@ final class RealtimeData: ObservableObject {
 //
 //            }
         })
+
+        // 방의 채팅 목록 가져오기
+        ref.child("Chat/\(roomId)/chat").observe(DataEventType.value, with: { (snapshot) in
+            let dict = snapshot.value as? [String : AnyObject] ?? [:]
+            for (person, info) in dict {
+
+                let infoDict = info as? [String: AnyObject] ?? [:]
+
+                self.messages = []
+                self.messages.append(
+                    Message(id: person,
+                                message: infoDict["message"] as? String ?? "",
+                                name: infoDict["name"] as? String ?? "",
+                                time: infoDict["time"] as? String ?? "")
+                )
+                print(self.messages)
+            }
+        })
+
     }
 }
 
@@ -62,8 +81,9 @@ struct Participant: Hashable, Codable, Identifiable {
     var status: Bool
 }
 
-//struct Message: Hashable, Codable, Identifiable {
-//    var message: String
-//    var name: String
-//    var time: String
-//}
+struct Message: Hashable, Codable, Identifiable {
+    var id: String  // Firebase RealtimeDB의 chat에 있는 key 값들
+    var message: String
+    var name: String
+    var time: String
+}
