@@ -18,7 +18,7 @@ struct ContentView: View {
 
     var body: some View {
         // for debug - 로그인 생략
-        return AnyView(MainView())
+        return AnyView(PaymentView())
 //        if info.isSignIn == .success {
 //            return AnyView(MainView())
 //        } else {

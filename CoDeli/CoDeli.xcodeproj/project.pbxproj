@@ -27,6 +27,8 @@
 		679F03092621CBEB00FD0223 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 679F03082621CBEB00FD0223 /* Preview Assets.xcassets */; };
 		679F03142621CBF300FD0223 /* CoDeliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03132621CBF300FD0223 /* CoDeliTests.swift */; };
 		679F031F2621CBF400FD0223 /* CoDeliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F031E2621CBF400FD0223 /* CoDeliUITests.swift */; };
+		67C1F0852645AE8D00882935 /* KlipSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C1F0812645ACE000882935 /* KlipSDK.framework */; };
+		67C1F0862645AE8D00882935 /* KlipSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 67C1F0812645ACE000882935 /* KlipSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67C684A726403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
 		67C684A826403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
 		67C684A926403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
@@ -51,7 +53,28 @@
 			remoteGlobalIDString = 679F02FD2621CBDE00FD0223;
 			remoteInfo = CoDeli;
 		};
+		67C1F0802645ACE000882935 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67C1F07C2645ACE000882935 /* KlipSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 678403572645773B002C88EA;
+			remoteInfo = KlipSDK;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		67C1F0872645AE8D00882935 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				67C1F0862645AE8D00882935 /* KlipSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		63770195E4A902D9FFEACD1B /* Pods_CoDeli_CoDeliUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoDeli_CoDeliUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,33 +85,6 @@
 		67660D092641B67500C3E39C /* RealtimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeData.swift; sourceTree = "<group>"; };
 		67660D1C264248BE00C3E39C /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		67660D242642B45100C3E39C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
-		67660D2E26453F1D00C3E39C /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
-		67660D3026453F1D00C3E39C /* KlipRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipRemote.swift; sourceTree = "<group>"; };
-		67660D3126453F1D00C3E39C /* KlipSDKInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KlipSDKInfo.plist; sourceTree = "<group>"; };
-		67660D3226453F1D00C3E39C /* klip_sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = klip_sdk.h; sourceTree = "<group>"; };
-		67660D3426453F1D00C3E39C /* Klip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Klip.swift; sourceTree = "<group>"; };
-		67660D3526453F1D00C3E39C /* KlipProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipProtocol.swift; sourceTree = "<group>"; };
-		67660D3726453F1D00C3E39C /* CardListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListResponse.swift; sourceTree = "<group>"; };
-		67660D3826453F1D00C3E39C /* KlipErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipErrorResponse.swift; sourceTree = "<group>"; };
-		67660D3926453F1D00C3E39C /* KlipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipResponse.swift; sourceTree = "<group>"; };
-		67660D3B26453F1D00C3E39C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		67660D3C26453F1D00C3E39C /* KlipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipError.swift; sourceTree = "<group>"; };
-		67660D3D26453F1D00C3E39C /* prepare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prepare.swift; sourceTree = "<group>"; };
-		67660D3E26453F1D00C3E39C /* KlipResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipResponseModel.swift; sourceTree = "<group>"; };
-		67660D3F26453F1D00C3E39C /* KlipTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipTxResponse.swift; sourceTree = "<group>"; };
-		67660D4126453F1D00C3E39C /* KlipEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipEncoder.swift; sourceTree = "<group>"; };
-		67660D4326453F1D00C3E39C /* GetResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetResultService.swift; sourceTree = "<group>"; };
-		67660D4426453F1D00C3E39C /* GetResultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetResultRequest.swift; sourceTree = "<group>"; };
-		67660D4626453F1D00C3E39C /* PrepareRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareRequest.swift; sourceTree = "<group>"; };
-		67660D4726453F1D00C3E39C /* PrepareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareService.swift; sourceTree = "<group>"; };
-		67660D4826453F1D00C3E39C /* KlipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipService.swift; sourceTree = "<group>"; };
-		67660D4A26453F1D00C3E39C /* GetCardListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardListService.swift; sourceTree = "<group>"; };
-		67660D4B26453F1D00C3E39C /* GetCardListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardListRequest.swift; sourceTree = "<group>"; };
-		67660D4D26453F1D00C3E39C /* BAppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAppInfo.swift; sourceTree = "<group>"; };
-		67660D4E26453F1D00C3E39C /* BAppDeepLinkCB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAppDeepLinkCB.swift; sourceTree = "<group>"; };
-		67660D4F26453F1D00C3E39C /* KlipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipRequest.swift; sourceTree = "<group>"; };
-		67660D5026453F1D00C3E39C /* KlipCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipCallback.swift; sourceTree = "<group>"; };
-		67660D5126453F1D00C3E39C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		677354222622E1A3003F0EA8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomView.swift; sourceTree = "<group>"; };
 		6773543826232002003F0EA8 /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
@@ -106,6 +102,7 @@
 		679F031A2621CBF400FD0223 /* CoDeliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoDeliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		679F031E2621CBF400FD0223 /* CoDeliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoDeliUITests.swift; sourceTree = "<group>"; };
 		679F03202621CBF400FD0223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67C1F07C2645ACE000882935 /* KlipSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KlipSDK.xcodeproj; path = ../../KlipSDK/KlipSDK.xcodeproj; sourceTree = "<group>"; };
 		67C684A626403FA200041068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67CCCAAC262206A8008DF161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		67CCCAB1262206B9008DF161 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -126,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8813955860E8F0325CEEEEB4 /* Pods_CoDeli.framework in Frameworks */,
+				67C1F0852645AE8D00882935 /* KlipSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,121 +159,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		67660D2C26453F1C00C3E39C /* KlipSDK */ = {
-			isa = PBXGroup;
-			children = (
-				67660D2D26453F1C00C3E39C /* Extension */,
-				67660D2F26453F1D00C3E39C /* Network */,
-				67660D3126453F1D00C3E39C /* KlipSDKInfo.plist */,
-				67660D3226453F1D00C3E39C /* klip_sdk.h */,
-				67660D3326453F1D00C3E39C /* API */,
-				67660D5126453F1D00C3E39C /* Info.plist */,
-			);
-			name = KlipSDK;
-			path = "klip-a2a-sdk-ios-v2/KlipSDK/KlipSDK";
-			sourceTree = "<group>";
-		};
-		67660D2D26453F1C00C3E39C /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				67660D2E26453F1D00C3E39C /* URL+Extension.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		67660D2F26453F1D00C3E39C /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				67660D3026453F1D00C3E39C /* KlipRemote.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		67660D3326453F1D00C3E39C /* API */ = {
-			isa = PBXGroup;
-			children = (
-				67660D3426453F1D00C3E39C /* Klip.swift */,
-				67660D3526453F1D00C3E39C /* KlipProtocol.swift */,
-				67660D3626453F1D00C3E39C /* Response */,
-				67660D4026453F1D00C3E39C /* Request */,
-				67660D5026453F1D00C3E39C /* KlipCallback.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		67660D3626453F1D00C3E39C /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				67660D3726453F1D00C3E39C /* CardListResponse.swift */,
-				67660D3826453F1D00C3E39C /* KlipErrorResponse.swift */,
-				67660D3926453F1D00C3E39C /* KlipResponse.swift */,
-				67660D3A26453F1D00C3E39C /* Model */,
-				67660D3E26453F1D00C3E39C /* KlipResponseModel.swift */,
-				67660D3F26453F1D00C3E39C /* KlipTxResponse.swift */,
-			);
-			path = Response;
-			sourceTree = "<group>";
-		};
-		67660D3A26453F1D00C3E39C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				67660D3B26453F1D00C3E39C /* Card.swift */,
-				67660D3C26453F1D00C3E39C /* KlipError.swift */,
-				67660D3D26453F1D00C3E39C /* prepare.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		67660D4026453F1D00C3E39C /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				67660D4126453F1D00C3E39C /* KlipEncoder.swift */,
-				67660D4226453F1D00C3E39C /* Result */,
-				67660D4526453F1D00C3E39C /* Prepare */,
-				67660D4826453F1D00C3E39C /* KlipService.swift */,
-				67660D4926453F1D00C3E39C /* GetCardList */,
-				67660D4C26453F1D00C3E39C /* Model */,
-				67660D4F26453F1D00C3E39C /* KlipRequest.swift */,
-			);
-			path = Request;
-			sourceTree = "<group>";
-		};
-		67660D4226453F1D00C3E39C /* Result */ = {
-			isa = PBXGroup;
-			children = (
-				67660D4326453F1D00C3E39C /* GetResultService.swift */,
-				67660D4426453F1D00C3E39C /* GetResultRequest.swift */,
-			);
-			path = Result;
-			sourceTree = "<group>";
-		};
-		67660D4526453F1D00C3E39C /* Prepare */ = {
-			isa = PBXGroup;
-			children = (
-				67660D4626453F1D00C3E39C /* PrepareRequest.swift */,
-				67660D4726453F1D00C3E39C /* PrepareService.swift */,
-			);
-			path = Prepare;
-			sourceTree = "<group>";
-		};
-		67660D4926453F1D00C3E39C /* GetCardList */ = {
-			isa = PBXGroup;
-			children = (
-				67660D4A26453F1D00C3E39C /* GetCardListService.swift */,
-				67660D4B26453F1D00C3E39C /* GetCardListRequest.swift */,
-			);
-			path = GetCardList;
-			sourceTree = "<group>";
-		};
-		67660D4C26453F1D00C3E39C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				67660D4D26453F1D00C3E39C /* BAppInfo.swift */,
-				67660D4E26453F1D00C3E39C /* BAppDeepLinkCB.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		679F02F52621CBDD00FD0223 = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +184,7 @@
 		679F03002621CBDE00FD0223 /* CoDeli */ = {
 			isa = PBXGroup;
 			children = (
+				67C1F07C2645ACE000882935 /* KlipSDK.xcodeproj */,
 				679F03012621CBDE00FD0223 /* CoDeliApp.swift */,
 				67CCCA7C262201ED008DF161 /* Views */,
 				67CCCA7D2622020B008DF161 /* Model */,
@@ -338,6 +222,14 @@
 			path = CoDeliUITests;
 			sourceTree = "<group>";
 		};
+		67C1F07D2645ACE000882935 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				67C1F0812645ACE000882935 /* KlipSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		67CCCA7C262201ED008DF161 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,15 +238,15 @@
 				677354222622E1A3003F0EA8 /* MainView.swift */,
 				67CCCAAC262206A8008DF161 /* HomeView.swift */,
 				6773543826232002003F0EA8 /* HomeRow.swift */,
+				6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */,
 				67660CEE2641A89200C3E39C /* RoomDetailView.swift */,
 				67660CF92641B25E00C3E39C /* ParticipantsView.swift */,
 				67660D012641B27C00C3E39C /* ParticipantRow.swift */,
 				67660D242642B45100C3E39C /* MessageCell.swift */,
 				67660D1C264248BE00C3E39C /* MessageView.swift */,
 				67CCCAB1262206B9008DF161 /* ChatView.swift */,
-				6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */,
-				67CCCAB6262206C5008DF161 /* MyView.swift */,
 				6773544B26233D04003F0EA8 /* PaymentView.swift */,
+				67CCCAB6262206C5008DF161 /* MyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -371,7 +263,6 @@
 		7EEBD0DA5C2A1C08E22281B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				67660D2C26453F1C00C3E39C /* KlipSDK */,
 				C1141818B0527F3DAEA6BCD7 /* Pods_CoDeli.framework */,
 				63770195E4A902D9FFEACD1B /* Pods_CoDeli_CoDeliUITests.framework */,
 				97C13A02AC109883DB9B20B7 /* Pods_CoDeliTests.framework */,
@@ -392,6 +283,7 @@
 				679F02FC2621CBDE00FD0223 /* Resources */,
 				E75AB81C30E9BA3507158964 /* [CP] Embed Pods Frameworks */,
 				AD442B8AA4B3F3E1D7E70F32 /* [CP] Copy Pods Resources */,
+				67C1F0872645AE8D00882935 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -475,6 +367,12 @@
 			mainGroup = 679F02F52621CBDD00FD0223;
 			productRefGroup = 679F02FF2621CBDE00FD0223 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 67C1F07D2645ACE000882935 /* Products */;
+					ProjectRef = 67C1F07C2645ACE000882935 /* KlipSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				679F02FD2621CBDE00FD0223 /* CoDeli */,
@@ -483,6 +381,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		67C1F0812645ACE000882935 /* KlipSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KlipSDK.framework;
+			remoteRef = 67C1F0802645ACE000882935 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		679F02FC2621CBDE00FD0223 /* Resources */ = {
@@ -827,22 +735,33 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4AF3EBE5FD28C6D28101E3C /* Pods-CoDeli.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CoDeli/Preview Content\"";
 				DEVELOPMENT_TEAM = 9HB659H6D9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/klip-a2a-sdk-ios-v2/KlipSDK/KlipSDK-Sample",
+				);
 				INFOPLIST_FILE = CoDeli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/klip-a2a-sdk-ios-v2/KlipSDK/KlipSDK-Sample/KlipSDK.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cslim.CoDeli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -850,22 +769,33 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F6435CEE914CB0A64B983542 /* Pods-CoDeli.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CoDeli/Preview Content\"";
 				DEVELOPMENT_TEAM = 9HB659H6D9;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/klip-a2a-sdk-ios-v2/KlipSDK/KlipSDK-Sample",
+				);
 				INFOPLIST_FILE = CoDeli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/klip-a2a-sdk-ios-v2/KlipSDK/KlipSDK-Sample/KlipSDK.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cslim.CoDeli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

@@ -16,10 +16,11 @@ final class RealtimeData: ObservableObject {
     @Published var myInfo = User(email: "sspog.lim@gmail.com",
                                  name: "임창성",
                                  nickname: "cslim")
+    @Published var serverWalletAddress: String = ""
+
+    var ref: DatabaseReference! = Database.database().reference()
 
     func fetchData(roomId: Int) {
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
 
         // Listen for new comments in the Firebase database
 //        ref.observe(.childAdded, with: { (snapshot) -> Void in
@@ -90,6 +91,13 @@ final class RealtimeData: ObservableObject {
 //    func fetchUserData() {
 //
 //    }
+
+    func fetchServerWalletAddress() {
+        // Read once with an observer
+        ref.child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.serverWalletAddress = snapshot.value as? String ?? ""
+        })
+    }
 }
 
 struct Participant: Hashable, Codable, Identifiable {
