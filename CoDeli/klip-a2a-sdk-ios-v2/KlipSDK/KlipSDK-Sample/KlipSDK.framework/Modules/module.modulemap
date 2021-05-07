@@ -1,0 +1,4 @@
+framework module KlipSDK {
+  header "KlipSDK-Swift.h"
+  requires objc
+}

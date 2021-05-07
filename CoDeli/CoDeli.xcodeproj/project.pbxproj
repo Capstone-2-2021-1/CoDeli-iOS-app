@@ -62,6 +62,33 @@
 		67660D092641B67500C3E39C /* RealtimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeData.swift; sourceTree = "<group>"; };
 		67660D1C264248BE00C3E39C /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		67660D242642B45100C3E39C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		67660D2E26453F1D00C3E39C /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		67660D3026453F1D00C3E39C /* KlipRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipRemote.swift; sourceTree = "<group>"; };
+		67660D3126453F1D00C3E39C /* KlipSDKInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KlipSDKInfo.plist; sourceTree = "<group>"; };
+		67660D3226453F1D00C3E39C /* klip_sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = klip_sdk.h; sourceTree = "<group>"; };
+		67660D3426453F1D00C3E39C /* Klip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Klip.swift; sourceTree = "<group>"; };
+		67660D3526453F1D00C3E39C /* KlipProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipProtocol.swift; sourceTree = "<group>"; };
+		67660D3726453F1D00C3E39C /* CardListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListResponse.swift; sourceTree = "<group>"; };
+		67660D3826453F1D00C3E39C /* KlipErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipErrorResponse.swift; sourceTree = "<group>"; };
+		67660D3926453F1D00C3E39C /* KlipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipResponse.swift; sourceTree = "<group>"; };
+		67660D3B26453F1D00C3E39C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		67660D3C26453F1D00C3E39C /* KlipError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipError.swift; sourceTree = "<group>"; };
+		67660D3D26453F1D00C3E39C /* prepare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prepare.swift; sourceTree = "<group>"; };
+		67660D3E26453F1D00C3E39C /* KlipResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipResponseModel.swift; sourceTree = "<group>"; };
+		67660D3F26453F1D00C3E39C /* KlipTxResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipTxResponse.swift; sourceTree = "<group>"; };
+		67660D4126453F1D00C3E39C /* KlipEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipEncoder.swift; sourceTree = "<group>"; };
+		67660D4326453F1D00C3E39C /* GetResultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetResultService.swift; sourceTree = "<group>"; };
+		67660D4426453F1D00C3E39C /* GetResultRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetResultRequest.swift; sourceTree = "<group>"; };
+		67660D4626453F1D00C3E39C /* PrepareRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareRequest.swift; sourceTree = "<group>"; };
+		67660D4726453F1D00C3E39C /* PrepareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareService.swift; sourceTree = "<group>"; };
+		67660D4826453F1D00C3E39C /* KlipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipService.swift; sourceTree = "<group>"; };
+		67660D4A26453F1D00C3E39C /* GetCardListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardListService.swift; sourceTree = "<group>"; };
+		67660D4B26453F1D00C3E39C /* GetCardListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardListRequest.swift; sourceTree = "<group>"; };
+		67660D4D26453F1D00C3E39C /* BAppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAppInfo.swift; sourceTree = "<group>"; };
+		67660D4E26453F1D00C3E39C /* BAppDeepLinkCB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BAppDeepLinkCB.swift; sourceTree = "<group>"; };
+		67660D4F26453F1D00C3E39C /* KlipRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipRequest.swift; sourceTree = "<group>"; };
+		67660D5026453F1D00C3E39C /* KlipCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlipCallback.swift; sourceTree = "<group>"; };
+		67660D5126453F1D00C3E39C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		677354222622E1A3003F0EA8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomView.swift; sourceTree = "<group>"; };
 		6773543826232002003F0EA8 /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
@@ -132,6 +159,121 @@
 				95B110F6F40916D6043CCBE8 /* Pods-CoDeliTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		67660D2C26453F1C00C3E39C /* KlipSDK */ = {
+			isa = PBXGroup;
+			children = (
+				67660D2D26453F1C00C3E39C /* Extension */,
+				67660D2F26453F1D00C3E39C /* Network */,
+				67660D3126453F1D00C3E39C /* KlipSDKInfo.plist */,
+				67660D3226453F1D00C3E39C /* klip_sdk.h */,
+				67660D3326453F1D00C3E39C /* API */,
+				67660D5126453F1D00C3E39C /* Info.plist */,
+			);
+			name = KlipSDK;
+			path = "klip-a2a-sdk-ios-v2/KlipSDK/KlipSDK";
+			sourceTree = "<group>";
+		};
+		67660D2D26453F1C00C3E39C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				67660D2E26453F1D00C3E39C /* URL+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		67660D2F26453F1D00C3E39C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				67660D3026453F1D00C3E39C /* KlipRemote.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		67660D3326453F1D00C3E39C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				67660D3426453F1D00C3E39C /* Klip.swift */,
+				67660D3526453F1D00C3E39C /* KlipProtocol.swift */,
+				67660D3626453F1D00C3E39C /* Response */,
+				67660D4026453F1D00C3E39C /* Request */,
+				67660D5026453F1D00C3E39C /* KlipCallback.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		67660D3626453F1D00C3E39C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				67660D3726453F1D00C3E39C /* CardListResponse.swift */,
+				67660D3826453F1D00C3E39C /* KlipErrorResponse.swift */,
+				67660D3926453F1D00C3E39C /* KlipResponse.swift */,
+				67660D3A26453F1D00C3E39C /* Model */,
+				67660D3E26453F1D00C3E39C /* KlipResponseModel.swift */,
+				67660D3F26453F1D00C3E39C /* KlipTxResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		67660D3A26453F1D00C3E39C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				67660D3B26453F1D00C3E39C /* Card.swift */,
+				67660D3C26453F1D00C3E39C /* KlipError.swift */,
+				67660D3D26453F1D00C3E39C /* prepare.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		67660D4026453F1D00C3E39C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				67660D4126453F1D00C3E39C /* KlipEncoder.swift */,
+				67660D4226453F1D00C3E39C /* Result */,
+				67660D4526453F1D00C3E39C /* Prepare */,
+				67660D4826453F1D00C3E39C /* KlipService.swift */,
+				67660D4926453F1D00C3E39C /* GetCardList */,
+				67660D4C26453F1D00C3E39C /* Model */,
+				67660D4F26453F1D00C3E39C /* KlipRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		67660D4226453F1D00C3E39C /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				67660D4326453F1D00C3E39C /* GetResultService.swift */,
+				67660D4426453F1D00C3E39C /* GetResultRequest.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		67660D4526453F1D00C3E39C /* Prepare */ = {
+			isa = PBXGroup;
+			children = (
+				67660D4626453F1D00C3E39C /* PrepareRequest.swift */,
+				67660D4726453F1D00C3E39C /* PrepareService.swift */,
+			);
+			path = Prepare;
+			sourceTree = "<group>";
+		};
+		67660D4926453F1D00C3E39C /* GetCardList */ = {
+			isa = PBXGroup;
+			children = (
+				67660D4A26453F1D00C3E39C /* GetCardListService.swift */,
+				67660D4B26453F1D00C3E39C /* GetCardListRequest.swift */,
+			);
+			path = GetCardList;
+			sourceTree = "<group>";
+		};
+		67660D4C26453F1D00C3E39C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				67660D4D26453F1D00C3E39C /* BAppInfo.swift */,
+				67660D4E26453F1D00C3E39C /* BAppDeepLinkCB.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		679F02F52621CBDD00FD0223 = {
@@ -229,6 +371,7 @@
 		7EEBD0DA5C2A1C08E22281B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67660D2C26453F1C00C3E39C /* KlipSDK */,
 				C1141818B0527F3DAEA6BCD7 /* Pods_CoDeli.framework */,
 				63770195E4A902D9FFEACD1B /* Pods_CoDeli_CoDeliUITests.framework */,
 				97C13A02AC109883DB9B20B7 /* Pods_CoDeliTests.framework */,
