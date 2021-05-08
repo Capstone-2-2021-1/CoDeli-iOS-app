@@ -12,6 +12,9 @@ import Firebase
 final class RealtimeData: ObservableObject {
     @Published var participants = [Participant]()
     @Published var messages = [Message]()
+    
+    //dummy
+    @Published var uid: String = "nk7GoNfecmhPnLpKfS6t8YkwT433"
     // dummy
     @Published var myInfo = User(email: "sspog.lim@gmail.com",
                                  name: "임창성",
