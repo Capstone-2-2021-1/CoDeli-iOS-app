@@ -13,6 +13,7 @@ import GoogleSignIn
 struct CoDeliApp: App {
     @StateObject private var firestoreData = FirestoreData()
     @StateObject private var realtimeData = RealtimeData()
+    @StateObject private var internalData = InternalData()
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
@@ -25,6 +26,7 @@ struct CoDeliApp: App {
             ContentView(info: self.appDelegate)
                 .environmentObject(firestoreData)
                 .environmentObject(realtimeData)
+                .environmentObject(internalData)
         }
     }
 }

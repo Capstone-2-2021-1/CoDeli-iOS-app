@@ -47,14 +47,14 @@ final class RealtimeData: ObservableObject {
             }
 
             // 본인의 주문 정보는 제외함.
-            var i = 0
-            for each in self.participants {
-                if self.myInfo.nickname == each.id {
-                    self.participants.remove(at: i)
-                    break
-                }
-                i += 1
-            }
+//            var i = 0
+//            for each in self.participants {
+//                if self.myInfo.nickname == each.id {
+//                    self.participants.remove(at: i)
+//                    break
+//                }
+//                i += 1
+//            }
 
 //            for child in snapshot.children {
 //                let snap = child as! DataSnapshot

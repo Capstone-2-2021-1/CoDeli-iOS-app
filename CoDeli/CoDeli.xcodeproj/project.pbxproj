@@ -29,7 +29,7 @@
 		67C1F0852645AE8D00882935 /* KlipSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C1F0812645ACE000882935 /* KlipSDK.framework */; };
 		67C1F0862645AE8D00882935 /* KlipSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 67C1F0812645ACE000882935 /* KlipSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67C1F08B26465C2500882935 /* MyQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C1F08A26465C2500882935 /* MyQRView.swift */; };
-		67C1F0912646B4D100882935 /* InternalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C1F0902646B4D100882935 /* InternalModel.swift */; };
+		67C1F0912646B4D100882935 /* InternalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C1F0902646B4D100882935 /* InternalData.swift */; };
 		67C684A726403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
 		67C684A826403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
 		67C684A926403FA200041068 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67C684A626403FA200041068 /* GoogleService-Info.plist */; };
@@ -104,7 +104,7 @@
 		679F03202621CBF400FD0223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67C1F07C2645ACE000882935 /* KlipSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KlipSDK.xcodeproj; path = ../../KlipSDK/KlipSDK.xcodeproj; sourceTree = "<group>"; };
 		67C1F08A26465C2500882935 /* MyQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRView.swift; sourceTree = "<group>"; };
-		67C1F0902646B4D100882935 /* InternalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalModel.swift; sourceTree = "<group>"; };
+		67C1F0902646B4D100882935 /* InternalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalData.swift; sourceTree = "<group>"; };
 		67C684A626403FA200041068 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67CCCAAC262206A8008DF161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		67CCCAB1262206B9008DF161 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 			children = (
 				677354402623210A003F0EA8 /* FirestoreData.swift */,
 				67660D092641B67500C3E39C /* RealtimeData.swift */,
-				67C1F0902646B4D100882935 /* InternalModel.swift */,
+				67C1F0902646B4D100882935 /* InternalData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -572,7 +572,7 @@
 				67CCCAB7262206C5008DF161 /* MyView.swift in Sources */,
 				67660D022641B27C00C3E39C /* ParticipantRow.swift in Sources */,
 				677354232622E1A4003F0EA8 /* MainView.swift in Sources */,
-				67C1F0912646B4D100882935 /* InternalModel.swift in Sources */,
+				67C1F0912646B4D100882935 /* InternalData.swift in Sources */,
 				679F03042621CBDE00FD0223 /* SignInView.swift in Sources */,
 				67660CEF2641A89200C3E39C /* RoomDetailView.swift in Sources */,
 				67C1F08B26465C2500882935 /* MyQRView.swift in Sources */,

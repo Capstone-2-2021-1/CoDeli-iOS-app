@@ -13,6 +13,8 @@ struct PaymentFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
 
     @EnvironmentObject var realtimeData: RealtimeData
+    @EnvironmentObject var internalData: InternalData
+
     var ref: DatabaseReference! = Database.database().reference()
 
     var room: Room
@@ -88,6 +90,9 @@ struct PaymentFullScreenModalView: View {
 
                         ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["sendingStatus": response.status, "expiration_time": response.expirationTime])
 
+                        // 결제 완료 이후부터
+                        internalData.currentRoom = room
+                        
                         presentationMode.wrappedValue.dismiss()
                     case .failure(let error):
                         print("*klip.getResult.failure")
@@ -212,13 +217,10 @@ struct RoomDetailView: View {
                 .padding(.trailing)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                ParticipantsView()
+                ParticipantsView(isChatView: false)
             }
 
             MessageView()
-//            ScrollView {
-//                MessageView()
-//            }
 
             ZStack {
                 HStack {
