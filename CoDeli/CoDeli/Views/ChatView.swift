@@ -33,7 +33,7 @@ struct ChatView: View {
                         Spacer()
 
                         Button("도착\n확인") {
-                            ref.child("Chat/0/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
+                            ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
                         }
                         .frame(width: 80, height: 80)
                         .background(

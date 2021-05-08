@@ -16,13 +16,29 @@ struct HomeRow: View {
             spacing: 5
         ) {
             Text(room.restaurant)
-            ProgressView(value: Double(room.currentValue) / Double(room.minOrderAmount))
-                .progressViewStyle(DefaultProgressViewStyle())
-            Text("\(room.currentValue)")
-            Text("\(room.minOrderAmount)원 (배달팁: \(room.deliveryCost)원)")
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+            ZStack {
+                ProgressView(value: Double(room.currentValue) / Double(room.minOrderAmount))
+                    .progressViewStyle(DefaultProgressViewStyle())
+                    .accentColor(.green)
+                    .scaleEffect(x: 1, y: 5, anchor: .center)
+                Text("₩\(room.currentValue)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.white)
+                    .padding(.leading, 5)
+            }
+            HStack {
+                Text("\(room.minOrderAmount)원")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                Text("(배달팁: \(room.deliveryCost)원)")
+                    .font(.caption)
+            }
             HStack {
                 Text("\(room.deliveryAddress) \(room.deliveryDetailAddress)")
+                    .font(.subheadline)
                 Spacer()
+                Image("participant")
                 Text("\(room.participantsNum)/\(room.participantsMax)")
             }
         }

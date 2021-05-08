@@ -15,7 +15,7 @@ struct MakeRoomFullScreenModalView: View {
 
     @State private var restaurant: String = ""
     @State private var deliveryApp: String = ""
-    @State private var deliveryAddress: String = ""
+    @State private var deliveryAddress: String = "서울 동작구 흑석로84"
     @State private var deliveryDetailAddress: String = ""
     @State private var minOrderAmount: String = ""
     @State private var deliveryCost: String = ""
