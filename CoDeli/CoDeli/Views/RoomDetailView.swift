@@ -16,9 +16,6 @@ struct PaymentFullScreenModalView: View {
     var ref: DatabaseReference! = Database.database().reference()
 
     var room: Room
-    @Binding var menuName: String
-    @Binding var menuPrice: String
-    @Binding var status: Bool
 
     @State private var orderCost: UInt = 6100
     @State private var deliveryCost: UInt = 500
@@ -57,7 +54,7 @@ struct PaymentFullScreenModalView: View {
                 var myRequestKey: String = ""
 
                 // KLAY 전송 트랜잭션 요청문
-                let req: KlayTxRequest = KlayTxRequest(to: "0x697e67f7767558dcc8ffee7999e05807da45002d", amount: "0.01")
+                let req: KlayTxRequest = KlayTxRequest(to: "0x697e67f7767558dcc8ffee7999e05807da45002d", amount: "0.001")
 
                 // prepare
                 klip.prepare(request: req, bappInfo: bappInfo) { result in
@@ -89,19 +86,7 @@ struct PaymentFullScreenModalView: View {
                         print("*klip.getResult.success")
                         print(response)
 
-                        ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").setValue(
-                            ["id": realtimeData.myInfo.nickname,
-                             "menu_name": menuName,
-                             "menu_price": UInt(menuPrice) ?? 0,    // 위험..
-                             "status": status,
-                             "sendingStatus": response.status,
-                             "expiration_time": response.expirationTime]
-                        )
-
-                        // 기존의 Firebase 데이터를 다 삭제해버림..
-//                        let post = ["sendingStatus": response.status, "expiration_time": response.expirationTime] as [String : Any]
-//                        let childUpdates = ["Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)": post] as [String : Any]
-//                        ref.updateChildValues(childUpdates)
+                        ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["sendingStatus": response.status, "expiration_time": response.expirationTime])
 
                         presentationMode.wrappedValue.dismiss()
                     case .failure(let error):
@@ -180,7 +165,7 @@ struct RoomDetailView: View {
                         isPresented.toggle()
                     }
                     .fullScreenCover(isPresented: $isPresented) {
-                        PaymentFullScreenModalView(room: room, menuName: $menuName, menuPrice: $menuPrice, status: $status)
+                        PaymentFullScreenModalView(room: room)
                     }
                     .frame(width: 80, height: 40)
                     .background(RoundedRectangle(cornerRadius: 10)
