@@ -37,6 +37,7 @@ struct HomeRow: View {
             HStack {
                 Text("\(room.deliveryAddress) \(room.deliveryDetailAddress)")
                     .font(.subheadline)
+                    .foregroundColor(.gray)
                 Spacer()
                 Image("participant")
                 Text("\(room.participantsNum)/\(room.participantsMax)")

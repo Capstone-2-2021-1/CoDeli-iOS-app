@@ -23,6 +23,11 @@ struct MakeRoomFullScreenModalView: View {
 
     @State private var isEditing = false
 
+    init() {
+        UINavigationBarAppearance()
+            .setColor(title: .white, background: UIColor(Color(hex: 0xf6cd53)))
+    }
+
     var body: some View {
         NavigationView {
             Form {
@@ -140,10 +145,6 @@ struct MakeRoomFullScreenModalView: View {
                     }
                     .foregroundColor(.white)
             )
-            .onAppear() {
-                UINavigationBarAppearance()
-                    .setColor(title: .white, background: UIColor(Color(hex: 0xf6cd53)))
-            }
         }
     }
 }
