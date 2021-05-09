@@ -18,13 +18,10 @@ struct PaymentFullScreenModalView: View {
     var ref: DatabaseReference! = Database.database().reference()
 
     var room: Room
-
-    @State private var orderCost: UInt = 6100
-    @State private var deliveryCost: UInt = 500
-    @State private var totalCost: UInt = 6600
-    @State private var totalKlay: Double = 1.9270072    // 소수점 아래 6자리까지?
-    @State private var klayMarketPrice: UInt = 3425
-    @State private var stdTime: String = "2021/03/25 16:30"
+    var orderCost: UInt
+    var deliveryCost: UInt
+    var totalCost: UInt
+    var stdTime: String
 
     var body: some View {
         VStack {
@@ -36,10 +33,10 @@ struct PaymentFullScreenModalView: View {
                 .foregroundColor(Color(hex: 0x193154))
                 .font(.title)
             Image("klaytn")
-            Text("총 \(totalKlay) KLAY")
+            Text("총 \(Double(totalCost)/Double(realtimeData.klayValue)) KLAY")
                 .foregroundColor(Color(hex: 0x193154))
                 .font(.system(size: 30, weight: .heavy))
-            Text("(1KLAY = ₩\(klayMarketPrice), \(stdTime) 기준)")
+            Text("(1KLAY = ₩\(realtimeData.klayValue), \(stdTime) 기준)")
                 .foregroundColor(Color(hex: 0x707070))
 
             Spacer()
@@ -48,8 +45,8 @@ struct PaymentFullScreenModalView: View {
                 print("결제 버튼 눌림!")
 
                 // server의 지갑 주소 가져오기
-                realtimeData.fetchServerWalletAddress()
-                let toWalletAddress = realtimeData.serverWalletAddress
+//                realtimeData.fetchServerWalletAddress()
+//                let toWalletAddress = realtimeData.serverWalletAddress
 
                 let klip = KlipSDK.shared
                 let bappInfo: BAppInfo = BAppInfo(name : "CoDeli")
@@ -130,6 +127,11 @@ struct RoomDetailView: View {
 
     @State private var message: String = ""
 
+    @State private var deliveryCost: UInt = 0
+    @State private var totalCost: UInt = 0
+    @State private var totalKlay: Double = 0
+    @State private var stdTime: String = ""
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10, content: {
             HStack {
@@ -168,9 +170,21 @@ struct RoomDetailView: View {
 
                     Button("결제") {
                         isPresented.toggle()
+
+                        deliveryCost = room.deliveryCost/room.participantsNum
+                        totalCost = UInt(menuPrice)! + deliveryCost
+
+                        // 클레이튼 시세 가져오기
+                        realtimeData.fetchKlayValue()
+
+                        let date = Date()
+                        let df = DateFormatter()
+                        df.dateFormat = "yyyy/MM/dd HH:mm"
+                        stdTime = df.string(from: date)
+
                     }
                     .fullScreenCover(isPresented: $isPresented) {
-                        PaymentFullScreenModalView(room: room)
+                        PaymentFullScreenModalView(room: room, orderCost: UInt(menuPrice)!, deliveryCost: deliveryCost, totalCost: totalCost, stdTime: stdTime)
                     }
                     .frame(width: 80, height: 40)
                     .background(RoundedRectangle(cornerRadius: 10)

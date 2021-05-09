@@ -12,6 +12,8 @@ import Firebase
 final class RealtimeData: ObservableObject {
     @Published var participants = [Participant]()
     @Published var messages = [Message]()
+
+    @Published var klayValue: UInt = 0
     
     //dummy
     @Published var uid: String = "nk7GoNfecmhPnLpKfS6t8YkwT433"
@@ -80,16 +82,28 @@ final class RealtimeData: ObservableObject {
         })
     }
 
+    func fetchKlayValue() {
+        ref.child("klay_value").updateChildValues(["trigger": true])
+
+        // trigger로 서버로 요청보내고 새로 값이 바뀔 때까지 1초 기다림
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.ref.child("klay_value/value").observe(DataEventType.value, with: { (snapshot) in
+                self.klayValue = UInt(Float(snapshot.value as? String ?? "")!)
+                print(self.klayValue)
+            })
+        }
+    }
+
 //    func fetchUserData() {
 //
 //    }
 
-    func fetchServerWalletAddress() {
-        // Read once with an observer
-        ref.child("address").observeSingleEvent(of: .value, with: { (snapshot) in
-            self.serverWalletAddress = snapshot.value as? String ?? ""
-        })
-    }
+//    func fetchServerWalletAddress() {
+//        // Read once with an observer
+//        ref.child("address").observeSingleEvent(of: .value, with: { (snapshot) in
+//            self.serverWalletAddress = snapshot.value as? String ?? ""
+//        })
+//    }
 }
 
 struct Participant: Hashable, Codable, Identifiable {
