@@ -19,7 +19,8 @@ final class RealtimeData: ObservableObject {
     //dummy - for debug
     @Published var myInfo = User(email: "sspog.lim@gmail.com",
                                  name: "임창성",
-                                 nickname: "cslim")
+                                 nickname: "cslim",
+                                 klipAddress: "")
     @Published var serverWalletAddress: String = ""
 
     var ref: DatabaseReference! = Database.database().reference()
@@ -114,4 +115,5 @@ struct User: Hashable, Codable {
     var email: String
     var name: String
     var nickname: String
+    var klipAddress: String
 }

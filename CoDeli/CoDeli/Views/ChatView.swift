@@ -38,7 +38,7 @@ struct ChatView: View {
                             if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
                                 ref.child("Chat/\(room.id)/verification").updateChildValues(
                                     ["trigger": true,
-                                     "room_manager_wallet": ""]
+                                     "room_manager_wallet": realtimeData.myInfo.klipAddress]
                                 )
                             } else {
                                 ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])

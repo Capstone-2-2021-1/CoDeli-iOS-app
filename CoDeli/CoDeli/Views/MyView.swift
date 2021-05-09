@@ -19,10 +19,9 @@ struct ProfileImage: View {
 }
 
 struct MyView: View {
-    // 나중에 Firebase에서 정보 가져와서 동기화시킬 것임
-    @State private var profileName: String = "제인"
-    @State private var email: String = "sspog.lim@gmail.com"
-    @State private var klipAddress: String = "0xa068880258d070ed13F53BFC5044c1EFA67C4af8"
+    @EnvironmentObject var realtimeData: RealtimeData
+
+    @State private var klipAddress: String = ""
 
     @State private var chatNotiEnabled: Bool = true
     @State private var arrivalNotiEnabled: Bool = true
@@ -33,14 +32,15 @@ struct MyView: View {
                 Section(header: Text("프로필")) {
                     HStack(spacing: 15) {
                         ProfileImage()
-                        Text("\(profileName)")
+                        Text(realtimeData.myInfo.nickname)
                     }
                 }
                 Section(header: Text("이메일")) {
-                    Text("\(email)")
+                    Text(realtimeData.myInfo.email)
                 }
                 Section(header: Text("Klip 주소")) {
-                    Text("\(klipAddress)")
+                    TextField("0x...", text: $klipAddress)
+//                    Text("\(klipAddress)")
                 }
                 Section(header: Text("푸시알림 설정")) {
                     Toggle(isOn: $chatNotiEnabled) {
@@ -54,8 +54,9 @@ struct MyView: View {
             .navigationBarTitle("설정", displayMode: .large)
             .navigationBarItems(
                 trailing:
-                    Button("편집") {
-                        print("편집 버튼 눌림!")
+                    Button("저장") {
+                        print("저장 버튼 눌림!")
+                        realtimeData.myInfo.klipAddress = klipAddress
                     }
                     .foregroundColor(.white)
             )

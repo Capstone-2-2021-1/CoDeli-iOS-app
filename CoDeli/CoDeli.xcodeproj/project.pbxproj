@@ -16,7 +16,6 @@
 		67660D1D264248BE00C3E39C /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660D1C264248BE00C3E39C /* MessageView.swift */; };
 		67660D252642B45100C3E39C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660D242642B45100C3E39C /* MessageCell.swift */; };
 		677354232622E1A4003F0EA8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677354222622E1A3003F0EA8 /* MainView.swift */; };
-		6773542B2622F2C9003F0EA8 /* MakeRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */; };
 		6773543926232003003F0EA8 /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6773543826232002003F0EA8 /* HomeRow.swift */; };
 		677354412623210A003F0EA8 /* FirestoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677354402623210A003F0EA8 /* FirestoreData.swift */; };
 		679F03022621CBDE00FD0223 /* CoDeliApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03012621CBDE00FD0223 /* CoDeliApp.swift */; };
@@ -86,7 +85,6 @@
 		67660D1C264248BE00C3E39C /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		67660D242642B45100C3E39C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		677354222622E1A3003F0EA8 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeRoomView.swift; sourceTree = "<group>"; };
 		6773543826232002003F0EA8 /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
 		677354402623210A003F0EA8 /* FirestoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreData.swift; sourceTree = "<group>"; };
 		679F02FE2621CBDE00FD0223 /* CoDeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoDeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,7 +239,6 @@
 				677354222622E1A3003F0EA8 /* MainView.swift */,
 				67CCCAAC262206A8008DF161 /* HomeView.swift */,
 				6773543826232002003F0EA8 /* HomeRow.swift */,
-				6773542A2622F2C9003F0EA8 /* MakeRoomView.swift */,
 				67660CEE2641A89200C3E39C /* RoomDetailView.swift */,
 				67660CF92641B25E00C3E39C /* ParticipantsView.swift */,
 				67660D242642B45100C3E39C /* MessageCell.swift */,
@@ -581,7 +578,6 @@
 				67CCCAAD262206A8008DF161 /* HomeView.swift in Sources */,
 				67660D1D264248BE00C3E39C /* MessageView.swift in Sources */,
 				67660D252642B45100C3E39C /* MessageCell.swift in Sources */,
-				6773542B2622F2C9003F0EA8 /* MakeRoomView.swift in Sources */,
 				67CCCAB2262206B9008DF161 /* ChatView.swift in Sources */,
 				679F03022621CBDE00FD0223 /* CoDeliApp.swift in Sources */,
 			);
