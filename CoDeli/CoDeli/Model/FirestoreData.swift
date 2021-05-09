@@ -33,7 +33,8 @@ final class FirestoreData: ObservableObject {
                 let deliveryDetailAddress = data["deliveryDetailAddress"] as? String ?? ""
                 let participantsNum = data["participantsNum"] as? UInt ?? 0
                 let participantsMax = data["participantsMax"] as? UInt ?? 0
-                return Room(id: Int(id) ?? 0, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax)
+                let owner = data["owner"] as? String ?? ""
+                return Room(id: Int(id) ?? 0, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax, owner: owner)
             }
         }
     }
@@ -50,4 +51,5 @@ struct Room: Hashable, Codable, Identifiable {
     var deliveryDetailAddress: String
     var participantsNum: UInt
     var participantsMax: UInt
+    var owner: String
 }

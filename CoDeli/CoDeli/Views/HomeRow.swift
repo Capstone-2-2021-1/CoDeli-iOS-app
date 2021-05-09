@@ -35,9 +35,14 @@ struct HomeRow: View {
                     .font(.caption)
             }
             HStack {
-                Text("\(room.deliveryAddress) \(room.deliveryDetailAddress)")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                VStack(alignment: .leading) {
+                    Text("\(room.deliveryAddress)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    Text("\(room.deliveryDetailAddress)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
                 Spacer()
                 Image("participant")
                 Text("\(room.participantsNum)/\(room.participantsMax)")

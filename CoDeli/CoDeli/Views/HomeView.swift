@@ -11,6 +11,8 @@ import FirebaseFirestore
 struct MakeRoomFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var firestoreData: FirestoreData
+    @EnvironmentObject var realtimeData: RealtimeData
+    @EnvironmentObject var internalData: InternalData
     private var db = Firestore.firestore()
 
     @State private var restaurant: String = ""
@@ -122,6 +124,9 @@ struct MakeRoomFullScreenModalView: View {
                     Button("완료") {
                         print("완료 버튼 눌림!")
 
+                        // 방장에게는 현재 방이 자신이 만든 방
+                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname)
+
                         db.collection("Rooms").document(String(firestoreData.rooms.count)).setData([
                             "restaurant": restaurant,
                             "deliveryApp": deliveryApp,
@@ -131,7 +136,8 @@ struct MakeRoomFullScreenModalView: View {
                             "deliveryAddress": deliveryAddress,
                             "deliveryDetailAddress": deliveryDetailAddress,
                             "participantsNum": 1,
-                            "participantsMax": participantsMax
+                            "participantsMax": participantsMax,
+                            "owner": realtimeData.myInfo.nickname
                         ]) { err in
                             if let err = err {
                                 print("Error writing document: \(err)")

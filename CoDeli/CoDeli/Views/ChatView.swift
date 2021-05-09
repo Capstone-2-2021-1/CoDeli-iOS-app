@@ -18,7 +18,9 @@ struct ChatView: View {
 
     var body: some View {
         let room: Room = internalData.currentRoom
-        if internalData.currentRoom.id >= 0 {
+
+        // 방장이면 방장뷰 보여주기
+        if internalData.currentRoom.owner == realtimeData.myInfo.nickname || internalData.currentRoom.id >= 0 {
             NavigationView {
                 VStack(alignment: .leading, spacing: 10, content: {
                     HStack {
@@ -32,8 +34,15 @@ struct ChatView: View {
 
                         Spacer()
 
-                        Button("도착\n확인") {
-                            ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
+                        Button(internalData.currentRoom.owner == realtimeData.myInfo.nickname ? "지급\n요청" : "도착\n확인") {
+                            if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
+                                ref.child("Chat/\(room.id)/verification").updateChildValues(
+                                    ["trigger": true,
+                                     "room_manager_wallet": ""]
+                                )
+                            } else {
+                                ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
+                            }
                         }
                         .frame(width: 80, height: 80)
                         .background(
