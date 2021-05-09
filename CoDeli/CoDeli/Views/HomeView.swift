@@ -147,7 +147,6 @@ struct MakeRoomFullScreenModalView: View {
                         }
 
                         presentationMode.wrappedValue.dismiss()
-                        print(firestoreData.rooms)
                     }
                     .foregroundColor(.white)
             )

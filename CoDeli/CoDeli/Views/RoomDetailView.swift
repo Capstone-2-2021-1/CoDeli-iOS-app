@@ -131,6 +131,8 @@ struct PaymentFullScreenModalView: View {
 struct RoomDetailView: View {
     @State private var isPresented = false
 
+    @EnvironmentObject var firestoreData: FirestoreData
+    var db = Firestore.firestore()
     @EnvironmentObject var realtimeData: RealtimeData
     var ref: DatabaseReference! = Database.database().reference()
 
@@ -173,6 +175,17 @@ struct RoomDetailView: View {
                              "menu_price": UInt(menuPrice) ?? 0,    // 위험..
                              "status": status]
                         )
+
+                        db.collection("Rooms").document(String(room.id)).updateData([
+                            "participantsNum": room.participantsNum + 1,
+                            "currentValue": room.currentValue + (UInt(menuPrice) ?? 0)
+                        ]) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                print("Document successfully written!")
+                            }
+                        }
 
                         hideKeyboard()
                     }
@@ -302,6 +315,15 @@ struct RoomDetailView: View {
         .navigationBarTitle(room.restaurant)
         .onAppear() {
             self.realtimeData.fetchData(roomId: room.id)
+            for participant in realtimeData.participants {
+                if realtimeData.myInfo.nickname == participant.id {
+                    isReady = participant.status ? true : false
+                    status = participant.status
+                    menuName = participant.menuName
+                    menuPrice = String(participant.menuPrice)
+                }
+            }
+            print("나타났다!")
         }
     }
 }
