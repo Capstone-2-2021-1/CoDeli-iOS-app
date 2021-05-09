@@ -26,6 +26,7 @@
 		679F03092621CBEB00FD0223 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 679F03082621CBEB00FD0223 /* Preview Assets.xcassets */; };
 		679F03142621CBF300FD0223 /* CoDeliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F03132621CBF300FD0223 /* CoDeliTests.swift */; };
 		679F031F2621CBF400FD0223 /* CoDeliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F031E2621CBF400FD0223 /* CoDeliUITests.swift */; };
+		67B255A02646E9B300F1438A /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B2559F2646E9B300F1438A /* SignUpView.swift */; };
 		67C1F0852645AE8D00882935 /* KlipSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C1F0812645ACE000882935 /* KlipSDK.framework */; };
 		67C1F0862645AE8D00882935 /* KlipSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 67C1F0812645ACE000882935 /* KlipSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		67C1F08B26465C2500882935 /* MyQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C1F08A26465C2500882935 /* MyQRView.swift */; };
@@ -102,6 +103,7 @@
 		679F031A2621CBF400FD0223 /* CoDeliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoDeliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		679F031E2621CBF400FD0223 /* CoDeliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoDeliUITests.swift; sourceTree = "<group>"; };
 		679F03202621CBF400FD0223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67B2559F2646E9B300F1438A /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		67C1F07C2645ACE000882935 /* KlipSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KlipSDK.xcodeproj; path = ../../KlipSDK/KlipSDK.xcodeproj; sourceTree = "<group>"; };
 		67C1F08A26465C2500882935 /* MyQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQRView.swift; sourceTree = "<group>"; };
 		67C1F0902646B4D100882935 /* InternalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalData.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				67660CE32641A35200C3E39C /* ContentView.swift */,
 				679F03032621CBDE00FD0223 /* SignInView.swift */,
+				67B2559F2646E9B300F1438A /* SignUpView.swift */,
 				677354222622E1A3003F0EA8 /* MainView.swift */,
 				67CCCAAC262206A8008DF161 /* HomeView.swift */,
 				6773543826232002003F0EA8 /* HomeRow.swift */,
@@ -571,6 +574,7 @@
 				67660CE42641A35200C3E39C /* ContentView.swift in Sources */,
 				67CCCAB7262206C5008DF161 /* MyView.swift in Sources */,
 				67660D022641B27C00C3E39C /* ParticipantRow.swift in Sources */,
+				67B255A02646E9B300F1438A /* SignUpView.swift in Sources */,
 				677354232622E1A4003F0EA8 /* MainView.swift in Sources */,
 				67C1F0912646B4D100882935 /* InternalData.swift in Sources */,
 				679F03042621CBDE00FD0223 /* SignInView.swift in Sources */,

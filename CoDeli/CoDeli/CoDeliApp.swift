@@ -44,8 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
     enum SignInState: Int {
         case fail = 0
         case success = 1
+        case complete = 2
     }
 
+    @Published var name: String = ""
     @Published var email: String = ""
     @Published var isSignIn: SignInState? = .fail
 
@@ -61,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
                                                         accessToken: authentication.accessToken)
         // ...
 
-        Auth.auth().signIn(with: credential) { (authResult, error) in
+        Auth.auth().signIn(with: credential) { [self] (authResult, error) in
 //            if let error = error {
 //                let authError = error as NSError
 //                // ...
@@ -70,10 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Observ
 
             // User is signed in
             // ...
-            // test
-            self.email = (authResult?.user.email)!
-            print(self.email)
 
+            self.name = (authResult?.user.displayName)!
+            self.email = (authResult?.user.email)!
             self.isSignIn = .success;
         }
     }

@@ -28,7 +28,7 @@ struct SignInView: View {
                 GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.first?.rootViewController
                 GIDSignIn.sharedInstance()?.signIn()
             }) {
-                Text(" Sign in with Google ")
+                Text(" 구글 계정으로 로그인 ")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
