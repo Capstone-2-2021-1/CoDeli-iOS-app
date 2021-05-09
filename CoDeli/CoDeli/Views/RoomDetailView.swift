@@ -164,7 +164,7 @@ struct RoomDetailView: View {
                             .shadow(color: .gray, radius: 2, x: 0, y: 2))
                     .foregroundColor(.white)
                     .font(.system(.headline, design: .rounded))
-                    .padding(.bottom, 5)
+                    .padding(.bottom, 3)
 
                     Button("결제") {
                         isPresented.toggle()
@@ -180,18 +180,17 @@ struct RoomDetailView: View {
                     .font(.system(.headline, design: .rounded))
                 }
             }
-            .padding(5)
+            .padding([.top, .leading, .trailing], 3)
 
-            VStack(alignment: .leading, spacing: 10, content: {
+            VStack(alignment: .leading, spacing: 5, content: {
                 Text("사용 플랫폼: \(room.deliveryApp)")
                 Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
                 Text("약속시간: ")
             })
             .font(.subheadline)
-            .padding(5)
+            .padding([.leading], 3)
 
             // 내 메뉴 이름, 가격 입력 받음
-
             VStack {
                 HStack {
                     if status {
@@ -218,6 +217,8 @@ struct RoomDetailView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 ParticipantsView(isChatView: false)
+                    .padding(.leading)
+                    .padding(.trailing)
             }
 
             MessageView()
@@ -260,7 +261,6 @@ struct RoomDetailView: View {
                 .padding(5)
             }
             .background(Color(hex:0x4caece))
-
         })
         .navigationBarTitle(room.restaurant)
         .onAppear() {

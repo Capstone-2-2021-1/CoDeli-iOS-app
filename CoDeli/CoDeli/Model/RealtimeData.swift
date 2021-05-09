@@ -16,9 +16,10 @@ final class RealtimeData: ObservableObject {
     //dummy
     @Published var uid: String = "nk7GoNfecmhPnLpKfS6t8YkwT433"
 
-    @Published var myInfo = User(email: "",
-                                 name: "",
-                                 nickname: "")
+    //dummy - for debug
+    @Published var myInfo = User(email: "sspog.lim@gmail.com",
+                                 name: "임창성",
+                                 nickname: "cslim")
     @Published var serverWalletAddress: String = ""
 
     var ref: DatabaseReference! = Database.database().reference()
