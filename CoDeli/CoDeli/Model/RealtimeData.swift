@@ -36,13 +36,17 @@ final class RealtimeData: ObservableObject {
             self.participants = []
 
             let dict = snapshot.value as? [String : AnyObject] ?? [:]
-            for (person, info) in dict {
+            for (_, info) in dict {
                 let infoDict = info as? [String: AnyObject] ?? [:]
                 self.participants.append(
                     Participant(id: infoDict["id"] as? String ?? "",
                                 menuName: infoDict["menu_name"] as? String ?? "",
                                 menuPrice: infoDict["menu_price"] as? UInt ?? 0,
-                                status: infoDict["status"] as? Bool ?? false)
+                                status: infoDict["status"] as? Bool ?? false,
+                                sendingStatus: infoDict["sendingStatus"] as? String ?? "",
+                                expirationTime: infoDict["expiration_time"] as? TimeInterval ?? 0,
+                                verificationStatus: infoDict["verification_status"] as? Bool ?? false,
+                                verification: infoDict["verification"] as? Bool ?? false)
                 )
                 print(self.participants)
             }
@@ -92,6 +96,10 @@ struct Participant: Hashable, Codable, Identifiable {
     var menuName: String
     var menuPrice: UInt
     var status: Bool
+    var sendingStatus: String
+    var expirationTime: TimeInterval
+    var verificationStatus: Bool
+    var verification: Bool
 }
 
 struct Message: Hashable, Codable, Identifiable {

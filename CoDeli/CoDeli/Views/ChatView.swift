@@ -41,19 +41,21 @@ struct ChatView: View {
                                 .fill(Color(hex:0x41c072))
                                 .shadow(color: .gray, radius: 2, x: 0, y: 2))
                         .foregroundColor(.white)
-                        .font(.system(.title2, design: .rounded))
+                        .font(.system(size: 25, weight: .bold, design: .rounded))
                     }
-                    .padding(5)
+                    .padding([.top, .leading, .trailing], 3)
 
-                    VStack(alignment: .leading, spacing: 10, content: {
+                    VStack(alignment: .leading, spacing: 5, content: {
                         Text("사용 플랫폼: \(room.deliveryApp)")
                         Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
                         Text("약속시간: ")
                     })
                     .font(.subheadline)
-                    .padding(5)
+                    .padding([.leading], 3)
+                    .padding([.bottom], 5)
 
                     ParticipantsView(isChatView: true)
+                        .padding([.leading, .trailing], 3)
 
                     MessageView()
 
@@ -69,18 +71,23 @@ struct ChatView: View {
 
                             Button(action: {
                                 let date = Date()
-                                var calendar = Calendar.current
-                                let hour = calendar.component(.hour, from: date)
-                                let minute = calendar.component(.minute, from: date)
-                                let second = calendar.component(.second, from: date)
+                                let df = DateFormatter()
 
-                                ref.child("Chat/\(room.id)/chat/\(realtimeData.myInfo.nickname)\(hour)\(minute)\(second)").setValue(
+                                df.dateFormat = "HHmmss"
+                                let messageId = df.string(from: date)
+
+                                df.dateFormat = "HH:mm"
+
+                                ref.child("Chat/\(room.id)/chat/\(messageId)").setValue(
                                     ["message": message,
                                      "name": realtimeData.myInfo.nickname,
-                                     "time": "\(hour):\(minute)"]
+                                     "time": df.string(from: date)]
                                 )
 
                                 hideKeyboard()
+                                // 메시지 창 clear
+                                self.message = ""
+
                                 print("메시지 보내기 버튼 눌림!")
                             }) {
                                 Image(systemName: "paperplane")
