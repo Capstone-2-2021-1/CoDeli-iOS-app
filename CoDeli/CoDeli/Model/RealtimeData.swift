@@ -46,31 +46,14 @@ final class RealtimeData: ObservableObject {
                 )
                 print(self.participants)
             }
-
-            // 본인의 주문 정보는 제외함.
-//            var i = 0
-//            for each in self.participants {
-//                if self.myInfo.nickname == each.id {
-//                    self.participants.remove(at: i)
-//                    break
-//                }
-//                i += 1
-//            }
-
-//            for child in snapshot.children {
-//                let snap = child as! DataSnapshot
-//                print(snap.value as? [String : AnyObject] ?? [:])
-//
-//            }
         })
 
         // 방의 채팅 목록 가져오기
-//        DataEventType.value
         ref.child("Chat/\(roomId)/chat").observe(DataEventType.value, with: { (snapshot) in
             self.messages = []
 
             let dict = snapshot.value as? [String : AnyObject] ?? [:]
-            for (person, info) in dict {
+            for (messageId, info) in dict {
 
                 let infoDict = info as? [String: AnyObject] ?? [:]
 
@@ -81,14 +64,14 @@ final class RealtimeData: ObservableObject {
                     isCurrentUser = true
                 }
                 self.messages.append(
-                    Message(id: person,
+                    Message(id: UInt(messageId)!,   // 위험 ㅋㅋ
                                 message: infoDict["message"] as? String ?? "",
                                 name: sender,
                                 time: infoDict["time"] as? String ?? "",
                                 isCurrentUser: isCurrentUser)
                 )
-                print(self.messages)
             }
+            self.messages.sort(by: {$0.id < $1.id})
         })
     }
 
@@ -112,7 +95,7 @@ struct Participant: Hashable, Codable, Identifiable {
 }
 
 struct Message: Hashable, Codable, Identifiable {
-    var id: String  // Firebase RealtimeDB의 chat에 있는 key 값들
+    var id: UInt  // Firebase RealtimeDB의 chat에 있는 key 값들
     var message: String
     var name: String
     var time: String

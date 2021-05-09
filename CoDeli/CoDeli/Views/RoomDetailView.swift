@@ -235,18 +235,23 @@ struct RoomDetailView: View {
 
                     Button(action: {
                         let date = Date()
-                        var calendar = Calendar.current
-                        let hour = calendar.component(.hour, from: date)
-                        let minute = calendar.component(.minute, from: date)
-                        let second = calendar.component(.second, from: date)
+                        let df = DateFormatter()
 
-                        ref.child("Chat/\(room.id)/chat/\(realtimeData.myInfo.nickname)\(hour)\(minute)\(second)").setValue(
+                        df.dateFormat = "HHmmss"
+                        let messageId = df.string(from: date)
+
+                        df.dateFormat = "HH:mm"
+
+                        ref.child("Chat/\(room.id)/chat/\(messageId)").setValue(
                             ["message": message,
                              "name": realtimeData.myInfo.nickname,
-                             "time": "\(hour):\(minute)"]
+                             "time": df.string(from: date)]
                         )
 
                         hideKeyboard()
+                        // 메시지 창 clear
+                        self.message = ""
+
                         print("메시지 보내기 버튼 눌림!")
                     }) {
                         Image(systemName: "paperplane")

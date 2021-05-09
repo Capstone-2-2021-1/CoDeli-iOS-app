@@ -43,7 +43,6 @@ struct MessageCell: View {
                         .cornerRadius(10)
                 }
             }
-
         }
     }
 }
