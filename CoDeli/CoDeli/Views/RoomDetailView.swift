@@ -23,6 +23,13 @@ struct PaymentFullScreenModalView: View {
     var totalCost: UInt
     var stdTime: String
 
+    // KlipSDK 관련
+    let klip = KlipSDK.shared
+    let bappInfo: BAppInfo = BAppInfo(name : "CoDeli")
+    @State private var myRequestKey: String = ""
+
+    @State private var isPaymentComplete: Bool = false
+
     var body: some View {
         VStack {
             Spacer()
@@ -41,72 +48,82 @@ struct PaymentFullScreenModalView: View {
 
             Spacer()
 
-            Button(action: {
-                print("결제 버튼 눌림!")
+            if !isPaymentComplete {
+                Button(action: {
+                    print("결제 버튼 눌림!")
 
-                // server의 지갑 주소 가져오기
-//                realtimeData.fetchServerWalletAddress()
-//                let toWalletAddress = realtimeData.serverWalletAddress
+                    // server의 지갑 주소 가져오기
+    //                realtimeData.fetchServerWalletAddress()
+    //                let toWalletAddress = realtimeData.serverWalletAddress
 
-                let klip = KlipSDK.shared
-                let bappInfo: BAppInfo = BAppInfo(name : "CoDeli")
-                var myRequestKey: String = ""
+                    // KLAY 전송 트랜잭션 요청문
+                    let req: KlayTxRequest = KlayTxRequest(to: "0x697e67f7767558dcc8ffee7999e05807da45002d", amount: "0.001")
 
-                // KLAY 전송 트랜잭션 요청문
-                let req: KlayTxRequest = KlayTxRequest(to: "0x697e67f7767558dcc8ffee7999e05807da45002d", amount: "0.001")
-
-                // prepare
-                klip.prepare(request: req, bappInfo: bappInfo) { result in
-                    switch result {
-                    case .success(let response):
-                        print("*klip.prepare.success")
-                        print(response)
-                        myRequestKey = response.requestKey
-                    case .failure(let error):
-                        print("*klip.prepare.failure")
-                        print(error)
+                    // prepare
+                    klip.prepare(request: req, bappInfo: bappInfo) { result in
+                        switch result {
+                        case .success(let response):
+                            print("*klip.prepare.success")
+                            print(response)
+                            myRequestKey = response.requestKey
+                        case .failure(let error):
+                            print("*klip.prepare.failure")
+                            print(error)
+                        }
                     }
-                }
 
-                // 위의 prepare에서 response.requestKey가 myRequestKey에 바로 들어오지 않음.. 일단 임시 방편으로..
-                while true {
-                    if myRequestKey != "" {
-                        break
+                    // 위의 prepare에서 response.requestKey가 myRequestKey에 바로 들어오지 않음.. 일단 임시 방편으로..
+                    while true {
+                        if myRequestKey != "" {
+                            break
+                        }
                     }
+
+                    // request - 카카오톡의 Klip앱으로 이동
+                    klip.request(requestKey: myRequestKey)
+
+                    isPaymentComplete = true
+                }) {
+                    Text("결제하기")
+                        .padding()
                 }
+                .frame(width: 400, height: 50)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(hex: 0x193154))
+                        .shadow(color: .gray, radius: 2, x: 0, y: 2))
+                .foregroundColor(.white)
+                .font(.title2)
+            } else {
+                Button(action: {
+                    print("결제 완료 버튼 눌림!")
 
-                // request - 카카오톡의 Klip앱으로 이동
-                klip.request(requestKey: myRequestKey)
-
-                // getResult
-                klip.getResult(requestKey: myRequestKey) { result in
-                    switch result {
-                    case .success(let response):
-                        print("*klip.getResult.success")
-                        print(response)
-
-                        ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["sendingStatus": response.status, "expiration_time": response.expirationTime])
-
-                        // 결제 완료 이후부터
-                        internalData.currentRoom = room
-                        
-                        presentationMode.wrappedValue.dismiss()
-                    case .failure(let error):
-                        print("*klip.getResult.failure")
-                        print(error)
+                    // getResult
+                    klip.getResult(requestKey: myRequestKey) { result in
+                        switch result {
+                        case .success(let response):
+                            print("*klip.getResult.success")
+                            ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["tx_hash": response.result?.txHash, "sendingStatus": response.result?.status, "expiration_time": response.expirationTime])
+                        case .failure(let error):
+                            print("*klip.getResult.failure")
+                            print(error)
+                        }
                     }
+                    // 결제 완료 이후부터
+                    internalData.currentRoom = room
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("결제 완료")
+                        .padding()
                 }
-            }) {
-                Text("결제하기")
-                    .padding()
+                .frame(width: 400, height: 50)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color(hex: 0x193154))
+                        .shadow(color: .gray, radius: 2, x: 0, y: 2))
+                .foregroundColor(.white)
+                .font(.title2)
             }
-            .frame(width: 400, height: 50)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(hex: 0x193154))
-                    .shadow(color: .gray, radius: 2, x: 0, y: 2))
-            .foregroundColor(.white)
-            .font(.title2)
         }
     }
 }
@@ -185,6 +202,7 @@ struct RoomDetailView: View {
                     }
                     .fullScreenCover(isPresented: $isPresented) {
                         PaymentFullScreenModalView(room: room, orderCost: UInt(menuPrice)!, deliveryCost: deliveryCost, totalCost: totalCost, stdTime: stdTime)
+                            .environmentObject(realtimeData)
                     }
                     .frame(width: 80, height: 40)
                     .background(RoundedRectangle(cornerRadius: 10)
