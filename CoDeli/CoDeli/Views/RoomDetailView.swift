@@ -57,7 +57,8 @@ struct PaymentFullScreenModalView: View {
     //                let toWalletAddress = realtimeData.serverWalletAddress
 
                     // KLAY 전송 트랜잭션 요청문
-                    let req: KlayTxRequest = KlayTxRequest(to: "0x697e67f7767558dcc8ffee7999e05807da45002d", amount: "0.001")
+
+                    let req: KlayTxRequest = KlayTxRequest(to: "0x697e67f7767558dcc8ffee7999e05807da45002d", amount: String(format: "%.6f", Double(totalCost)/Double(realtimeData.klayValue)))
 
                     // prepare
                     klip.prepare(request: req, bappInfo: bappInfo) { result in
@@ -201,7 +202,14 @@ struct RoomDetailView: View {
                     Button("결제") {
                         isPresented.toggle()
 
-                        deliveryCost = room.deliveryCost/room.participantsNum
+                        var participantsNum: UInt = 1
+                        for each in firestoreData.rooms {
+                            if room.id == each.id {
+                                participantsNum = each.participantsNum
+                            }
+                        }
+
+                        deliveryCost = room.deliveryCost/participantsNum
                         totalCost = UInt(menuPrice)! + deliveryCost
 
                         // 클레이튼 시세 가져오기
@@ -256,6 +264,7 @@ struct RoomDetailView: View {
                         "메뉴 가격",
                         text: $menuPrice
                     )
+                    .keyboardType(.numberPad)
                 }
                 .padding(.leading)
                 .padding(.trailing)

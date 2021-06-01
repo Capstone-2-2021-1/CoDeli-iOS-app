@@ -114,6 +114,7 @@ struct ChatView: View {
                 })
                 .navigationBarTitle(room.restaurant, displayMode: .inline)
                 .onAppear() {
+                    self.realtimeData.fetchData(roomId: room.id)
                     UINavigationBarAppearance()
                         .setColor(title: .white, background: UIColor(Color(hex: 0x4caece)))
                 }

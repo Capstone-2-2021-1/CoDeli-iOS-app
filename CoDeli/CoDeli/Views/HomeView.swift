@@ -157,6 +157,7 @@ struct MakeRoomFullScreenModalView: View {
 
 struct HomeView: View {
     @EnvironmentObject var firestoreData: FirestoreData
+    @EnvironmentObject var realtimeData: RealtimeData
 
     @State private var showingSheet = false
 
