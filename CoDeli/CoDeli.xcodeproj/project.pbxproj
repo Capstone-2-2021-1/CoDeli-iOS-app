@@ -17,6 +17,7 @@
 		67660D0A2641B67600C3E39C /* RealtimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660D092641B67500C3E39C /* RealtimeData.swift */; };
 		67660D1D264248BE00C3E39C /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660D1C264248BE00C3E39C /* MessageView.swift */; };
 		67660D252642B45100C3E39C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660D242642B45100C3E39C /* MessageCell.swift */; };
+		676ADE702667DF8E000F142D /* SwiftUIListSeparator in Frameworks */ = {isa = PBXBuildFile; productRef = 676ADE6F2667DF8E000F142D /* SwiftUIListSeparator */; };
 		677354232622E1A4003F0EA8 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677354222622E1A3003F0EA8 /* MainView.swift */; };
 		6773543926232003003F0EA8 /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6773543826232002003F0EA8 /* HomeRow.swift */; };
 		677354412623210A003F0EA8 /* FirestoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677354402623210A003F0EA8 /* FirestoreData.swift */; };
@@ -125,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				676ADE702667DF8E000F142D /* SwiftUIListSeparator in Frameworks */,
 				6764126926678F4500AAF2A3 /* SlidingTabView in Frameworks */,
 				8813955860E8F0325CEEEEB4 /* Pods_CoDeli.framework in Frameworks */,
 				67C1F0852645AE8D00882935 /* KlipSDK.framework in Frameworks */,
@@ -297,6 +299,7 @@
 			name = CoDeli;
 			packageProductDependencies = (
 				6764126826678F4500AAF2A3 /* SlidingTabView */,
+				676ADE6F2667DF8E000F142D /* SwiftUIListSeparator */,
 			);
 			productName = CoDeli;
 			productReference = 679F02FE2621CBDE00FD0223 /* CoDeli.app */;
@@ -375,6 +378,7 @@
 			mainGroup = 679F02F52621CBDD00FD0223;
 			packageReferences = (
 				6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				676ADE6E2667DF8E000F142D /* XCRemoteSwiftPackageReference "SwiftUIListSeparator" */,
 			);
 			productRefGroup = 679F02FF2621CBDE00FD0223 /* Products */;
 			projectDirPath = "";
@@ -949,6 +953,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		676ADE6E2667DF8E000F142D /* XCRemoteSwiftPackageReference "SwiftUIListSeparator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SchmidtyApps/SwiftUIListSeparator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -956,6 +968,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
 			productName = SlidingTabView;
+		};
+		676ADE6F2667DF8E000F142D /* SwiftUIListSeparator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 676ADE6E2667DF8E000F142D /* XCRemoteSwiftPackageReference "SwiftUIListSeparator" */;
+			productName = SwiftUIListSeparator;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

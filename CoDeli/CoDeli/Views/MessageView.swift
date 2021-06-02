@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIListSeparator
 
 struct MessageView: View {
     @EnvironmentObject var realtimeData: RealtimeData
@@ -48,8 +49,19 @@ struct MessageView: View {
 //            }
 //        }
 
-        List(realtimeData.messages) { message in
-            MessageCell(message: message, isCurrentUser: message.isCurrentUser)
+        if #available(iOS 14, *) {
+            ScrollView {
+                LazyVStack(spacing: 10) {
+                    ForEach(0...realtimeData.messages.count-1, id: \.self) { i in
+                        MessageCell(message: realtimeData.messages[i], isCurrentUser: realtimeData.messages[i].isCurrentUser)
+                    }
+                }
+            }
+        } else {
+            List(realtimeData.messages) { message in
+                MessageCell(message: message, isCurrentUser: message.isCurrentUser)
+            }
+            .listSeparatorStyle(.none)
         }
     }
 }

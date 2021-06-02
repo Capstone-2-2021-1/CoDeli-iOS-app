@@ -18,6 +18,7 @@ struct MessageCell: View {
                     .resizable()
                     .frame(width: 40, height: 40, alignment: .center)
                     .cornerRadius(20)
+                    .padding(.leading, 10)
                 VStack(alignment: .leading, spacing: 3, content: {
                     Text(message.name)
                         .font(.caption)
@@ -31,6 +32,7 @@ struct MessageCell: View {
                             .font(.caption2)
                     }
                 })
+                Spacer()
             } else {
                 Spacer()
                 HStack {
@@ -42,6 +44,7 @@ struct MessageCell: View {
                         .background(isCurrentUser ? Color.blue : Color(hex: 0xf0f0f0))
                         .cornerRadius(10)
                 }
+                .padding(.trailing, 10)
             }
         }
     }
