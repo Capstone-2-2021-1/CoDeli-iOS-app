@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import KlipSDK
+import SlidingTabView
 
 struct PaymentFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -130,6 +131,9 @@ struct PaymentFullScreenModalView: View {
 }
 
 struct RoomDetailView: View {
+    // SlidingTabView
+    @State private var selectedTabIndex = 0
+
     @State private var isPresented = false
 
     @EnvironmentObject var firestoreData: FirestoreData
@@ -153,186 +157,195 @@ struct RoomDetailView: View {
     @State private var stdTime: String = ""
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10, content: {
-            HStack {
-                VStack(alignment: .leading, spacing: 5, content: {
-                    Text("최소주문금액: \(room.minOrderAmount)")
-                        .fontWeight(.bold)
-                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
-                        .fontWeight(.bold)
-                })
-                .font(.system(size: 21, design: .rounded))
+        VStack(alignment: .leading) {
+            SlidingTabView(selection: self.$selectedTabIndex, tabs: ["준비", "채팅"])
+            if selectedTabIndex == 0 {
+                VStack(alignment: .leading, spacing: 10, content: {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5, content: {
+                            Text("최소주문금액: \(room.minOrderAmount)")
+                                .fontWeight(.bold)
+                            Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
+                                .fontWeight(.bold)
+                        })
+                        .font(.system(size: 21, design: .rounded))
 
-                Spacer()
+                        Spacer()
 
-                VStack {
-                    Button(isReady ? "취소" : "준비") {
-                        isReady = isReady ? false : true // flip
-                        status = isReady ? true : false
+                        VStack {
+                            Button(isReady ? "취소" : "준비") {
+                                isReady = isReady ? false : true // flip
+                                status = isReady ? true : false
 
-                        ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").setValue(
-                            ["id": realtimeData.myInfo.nickname,
-                             "menu_name": menuName,
-                             "menu_price": UInt(menuPrice) ?? 0,    // 위험..
-                             "status": status]
-                        )
+                                ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").setValue(
+                                    ["id": realtimeData.myInfo.nickname,
+                                     "menu_name": menuName,
+                                     "menu_price": UInt(menuPrice) ?? 0,    // 위험..
+                                     "status": status]
+                                )
 
-                        db.collection("Rooms").document(String(room.id)).updateData([
-                            "participantsNum": room.participantsNum + 1,
-                            "currentValue": room.currentValue + (UInt(menuPrice) ?? 0)
-                        ]) { err in
-                            if let err = err {
-                                print("Error writing document: \(err)")
-                            } else {
-                                print("Document successfully written!")
+                                db.collection("Rooms").document(String(room.id)).updateData([
+                                    "participantsNum": room.participantsNum + 1,
+                                    "currentValue": room.currentValue + (UInt(menuPrice) ?? 0)
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error writing document: \(err)")
+                                    } else {
+                                        print("Document successfully written!")
+                                    }
+                                }
+
+                                hideKeyboard()
                             }
-                        }
-
-                        hideKeyboard()
-                    }
-                    .frame(width: 80, height: 40)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex:0xf6cd53))
-                            .shadow(color: .gray, radius: 2, x: 0, y: 2))
-                    .foregroundColor(.white)
-                    .font(.system(.headline, design: .rounded))
-                    .padding(.bottom, 3)
-
-                    Button("결제") {
-                        isPresented.toggle()
-
-                        var participantsNum: UInt = 1
-                        for each in firestoreData.rooms {
-                            if room.id == each.id {
-                                participantsNum = each.participantsNum
-                            }
-                        }
-
-                        deliveryCost = room.deliveryCost/participantsNum
-                        totalCost = UInt(menuPrice)! + deliveryCost
-
-                        // 클레이튼 시세 가져오기
-                        realtimeData.fetchKlayValue()
-
-                        let date = Date()
-                        let df = DateFormatter()
-                        df.dateFormat = "yyyy/MM/dd HH:mm"
-                        stdTime = df.string(from: date)
-
-                    }
-                    .fullScreenCover(isPresented: $isPresented) {
-                        PaymentFullScreenModalView(room: room, orderCost: UInt(menuPrice)!, deliveryCost: deliveryCost, totalCost: totalCost, stdTime: stdTime)
-                            .environmentObject(realtimeData)
-                    }
-                    .frame(width: 80, height: 40)
-                    .background(RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color(hex:0x193154))
+                            .frame(width: 80, height: 40)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color(hex:0xf6cd53))
                                     .shadow(color: .gray, radius: 2, x: 0, y: 2))
-                    .foregroundColor(.white)
-                    .font(.system(.headline, design: .rounded))
-                }
-            }
-            .padding([.top, .leading, .trailing], 3)
+                            .foregroundColor(.white)
+                            .font(.system(.headline, design: .rounded))
+                            .padding(.bottom, 3)
 
-            VStack(alignment: .leading, spacing: 5, content: {
-                Text("사용 플랫폼: \(room.deliveryApp)")
-                Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
-                Text("약속시간: ")
-            })
-            .font(.subheadline)
-            .padding([.leading], 3)
+                            Button("결제") {
+                                isPresented.toggle()
 
-            // 내 메뉴 이름, 가격 입력 받음
-            VStack {
-                HStack {
-                    if status {
-                        Circle()
-                            .frame(width: 5, height: 5)
-                            .foregroundColor(.green)
-                    } else {
-                        Circle()
-                            .frame(width: 5, height: 5)
-                            .foregroundColor(.red)
+                                var participantsNum: UInt = 1
+                                for each in firestoreData.rooms {
+                                    if room.id == each.id {
+                                        participantsNum = each.participantsNum
+                                    }
+                                }
+
+                                deliveryCost = room.deliveryCost/participantsNum
+                                totalCost = UInt(menuPrice)! + deliveryCost
+
+                                // 클레이튼 시세 가져오기
+                                realtimeData.fetchKlayValue()
+
+                                let date = Date()
+                                let df = DateFormatter()
+                                df.dateFormat = "yyyy/MM/dd HH:mm"
+                                stdTime = df.string(from: date)
+
+                            }
+                            .fullScreenCover(isPresented: $isPresented) {
+                                PaymentFullScreenModalView(room: room, orderCost: UInt(menuPrice)!, deliveryCost: deliveryCost, totalCost: totalCost, stdTime: stdTime)
+                                    .environmentObject(realtimeData)
+                            }
+                            .frame(width: 80, height: 40)
+                            .background(RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color(hex:0x193154))
+                                            .shadow(color: .gray, radius: 2, x: 0, y: 2))
+                            .foregroundColor(.white)
+                            .font(.system(.headline, design: .rounded))
+                        }
                     }
-                    Text(realtimeData.myInfo.nickname)
-                    TextField(
-                        "메뉴 이름",
-                        text: $menuName
-                    )
-                    TextField(
-                        "메뉴 가격",
-                        text: $menuPrice
-                    )
-                    .keyboardType(.numberPad)
+                    .padding([.top, .leading, .trailing], 3)
+
+                    VStack(alignment: .leading, spacing: 5, content: {
+                        Text("사용 플랫폼: \(room.deliveryApp)")
+                        Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
+                        Text("약속시간: ")
+                    })
+                    .font(.subheadline)
+                    .padding(.leading, 3)
+                    .padding(.bottom, 10)
+
+                    // 내 메뉴 이름, 가격 입력 받음
+                    VStack {
+                        HStack {
+                            if status {
+                                Circle()
+                                    .frame(width: 5, height: 5)
+                                    .foregroundColor(.green)
+                            } else {
+                                Circle()
+                                    .frame(width: 5, height: 5)
+                                    .foregroundColor(.red)
+                            }
+                            Text(realtimeData.myInfo.nickname)
+                            TextField(
+                                "메뉴 이름",
+                                text: $menuName
+                            )
+                            TextField(
+                                "메뉴 가격",
+                                text: $menuPrice
+                            )
+                            .keyboardType(.numberPad)
+                        }
+                        .padding(.leading)
+                        .padding(.trailing)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                        ParticipantsView(isChatView: false)
+                            .padding(.leading)
+                            .padding(.trailing)
+                    }
+                })
+                .navigationBarTitle(room.restaurant)
+                .onAppear() {
+                    self.realtimeData.fetchData(roomId: room.id)
+                    for participant in realtimeData.participants {
+                        if realtimeData.myInfo.nickname == participant.id {
+                            isReady = participant.status ? true : false
+                            status = participant.status
+                            menuName = participant.menuName
+                            menuPrice = String(participant.menuPrice)
+                        }
+                    }
+                    print("나타났다!")
                 }
-                .padding(.leading)
-                .padding(.trailing)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                ParticipantsView(isChatView: false)
-                    .padding(.leading)
-                    .padding(.trailing)
-            }
+            } else if selectedTabIndex == 1 {
+                MessageView()
 
-            MessageView()
-
-            ZStack {
-                HStack {
-                    TextField(
-                        "보낼 메시지를 입력하세요",
-                        text: $message
-                    )
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    Spacer()
-
-                    Button(action: {
-                        let date = Date()
-                        let df = DateFormatter()
-
-                        df.dateFormat = "HHmmss"
-                        let messageId = df.string(from: date)
-
-                        df.dateFormat = "HH:mm"
-
-                        ref.child("Chat/\(room.id)/chat/\(messageId)").setValue(
-                            ["message": message,
-                             "name": realtimeData.myInfo.nickname,
-                             "time": df.string(from: date)]
+                ZStack {
+                    HStack {
+                        TextField(
+                            "보낼 메시지를 입력하세요",
+                            text: $message
                         )
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                        hideKeyboard()
-                        // 메시지 창 clear
-                        self.message = ""
+                        Spacer()
 
-                        print("메시지 보내기 버튼 눌림!")
-                    }) {
-                        Image(systemName: "paperplane")
+                        Button(action: {
+                            let date = Date()
+                            let df = DateFormatter()
+
+                            df.dateFormat = "HHmmss"
+                            let messageId = df.string(from: date)
+
+                            df.dateFormat = "HH:mm"
+
+                            ref.child("Chat/\(room.id)/chat/\(messageId)").setValue(
+                                ["message": message,
+                                 "name": realtimeData.myInfo.nickname,
+                                 "time": df.string(from: date)]
+                            )
+
+                            hideKeyboard()
+                            // 메시지 창 clear
+                            self.message = ""
+
+                            print("메시지 보내기 버튼 눌림!")
+                        }) {
+                            Image(systemName: "paperplane")
+                        }
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.white)
+                        .background(
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color(hex:0x42c273))
+                        )
                     }
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.white)
-                    .background(
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(Color(hex:0x42c273))
-                    )
+                    .padding(5)
                 }
-                .padding(5)
+                .background(Color(hex:0x4caece))
             }
-            .background(Color(hex:0x4caece))
-        })
-        .navigationBarTitle(room.restaurant)
-        .onAppear() {
-            self.realtimeData.fetchData(roomId: room.id)
-            for participant in realtimeData.participants {
-                if realtimeData.myInfo.nickname == participant.id {
-                    isReady = participant.status ? true : false
-                    status = participant.status
-                    menuName = participant.menuName
-                    menuPrice = String(participant.menuPrice)
-                }
-            }
-            print("나타났다!")
+
+            Spacer()
         }
     }
 }

@@ -20,6 +20,7 @@ struct ContentView: View {
 
     var body: some View {
         // for debug - 로그인 생략
+//        return AnyView(SlidingTabConsumerView())
         return AnyView(MainView())
 
 //        if info.isSignIn == .success {

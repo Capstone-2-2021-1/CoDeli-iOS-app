@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2C00C52ED6050D56C4802E3E /* Pods_CoDeliTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C13A02AC109883DB9B20B7 /* Pods_CoDeliTests.framework */; };
 		2E447E5C2EBAB3E0E44D942D /* Pods_CoDeli_CoDeliUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63770195E4A902D9FFEACD1B /* Pods_CoDeli_CoDeliUITests.framework */; };
+		6764126926678F4500AAF2A3 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 6764126826678F4500AAF2A3 /* SlidingTabView */; };
+		676412722667905200AAF2A3 /* SlidingTabConsumerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676412712667905200AAF2A3 /* SlidingTabConsumerView.swift */; };
 		67660CE42641A35200C3E39C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660CE32641A35200C3E39C /* ContentView.swift */; };
 		67660CEF2641A89200C3E39C /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660CEE2641A89200C3E39C /* RoomDetailView.swift */; };
 		67660CFA2641B25E00C3E39C /* ParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660CF92641B25E00C3E39C /* ParticipantsView.swift */; };
@@ -78,6 +80,7 @@
 
 /* Begin PBXFileReference section */
 		63770195E4A902D9FFEACD1B /* Pods_CoDeli_CoDeliUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoDeli_CoDeliUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		676412712667905200AAF2A3 /* SlidingTabConsumerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidingTabConsumerView.swift; sourceTree = "<group>"; };
 		67660CE32641A35200C3E39C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		67660CEE2641A89200C3E39C /* RoomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDetailView.swift; sourceTree = "<group>"; };
 		67660CF92641B25E00C3E39C /* ParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsView.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6764126926678F4500AAF2A3 /* SlidingTabView in Frameworks */,
 				8813955860E8F0325CEEEEB4 /* Pods_CoDeli.framework in Frameworks */,
 				67C1F0852645AE8D00882935 /* KlipSDK.framework in Frameworks */,
 			);
@@ -234,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				67660CE32641A35200C3E39C /* ContentView.swift */,
+				676412712667905200AAF2A3 /* SlidingTabConsumerView.swift */,
 				679F03032621CBDE00FD0223 /* SignInView.swift */,
 				67B2559F2646E9B300F1438A /* SignUpView.swift */,
 				677354222622E1A3003F0EA8 /* MainView.swift */,
@@ -290,6 +295,9 @@
 			dependencies = (
 			);
 			name = CoDeli;
+			packageProductDependencies = (
+				6764126826678F4500AAF2A3 /* SlidingTabView */,
+			);
 			productName = CoDeli;
 			productReference = 679F02FE2621CBDE00FD0223 /* CoDeli.app */;
 			productType = "com.apple.product-type.application";
@@ -365,6 +373,9 @@
 				Base,
 			);
 			mainGroup = 679F02F52621CBDD00FD0223;
+			packageReferences = (
+				6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+			);
 			productRefGroup = 679F02FF2621CBDE00FD0223 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -572,6 +583,7 @@
 				67C1F0912646B4D100882935 /* InternalData.swift in Sources */,
 				679F03042621CBDE00FD0223 /* SignInView.swift in Sources */,
 				67660CEF2641A89200C3E39C /* RoomDetailView.swift in Sources */,
+				676412722667905200AAF2A3 /* SlidingTabConsumerView.swift in Sources */,
 				67C1F08B26465C2500882935 /* MyQRView.swift in Sources */,
 				677354412623210A003F0EA8 /* FirestoreData.swift in Sources */,
 				67660CFA2641B25E00C3E39C /* ParticipantsView.swift in Sources */,
@@ -927,6 +939,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6764126826678F4500AAF2A3 /* SlidingTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
+			productName = SlidingTabView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 679F02F62621CBDD00FD0223 /* Project object */;
 }
