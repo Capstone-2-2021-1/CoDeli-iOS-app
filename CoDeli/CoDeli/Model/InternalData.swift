@@ -13,13 +13,15 @@ final class InternalData: ObservableObject {
 
 //    @Published var myOrderInfo = MyOrderInfo(menuName: "", menuPrice: 0)
     @Published var addressList = [Address]()
+    @Published var selectedAddress: Address = Address(id: -1, addressName: "", addressNameRoad: "", longitudeX: "", latitudeY: "")
 }
 
 struct MyOrderInfo: Hashable, Codable {
     
 }
 
-struct Address {
+struct Address: Hashable, Codable, Identifiable {
+    var id: Int
     let addressName: String
     let addressNameRoad: String
     let longitudeX: String

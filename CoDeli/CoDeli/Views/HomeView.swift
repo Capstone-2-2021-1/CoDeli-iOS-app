@@ -11,11 +11,26 @@ import Alamofire
 
 struct AddressSearchFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var internalData: InternalData
 
-    @State private var deliveryAddress: String = ""
+    @Binding var deliveryAddress: String
 
     var body: some View {
-        Text("도로명 주소")
+        List(internalData.addressList) { address in
+            Button(action: {
+                print(address.addressNameRoad)
+                internalData.selectedAddress = address
+                deliveryAddress = internalData.selectedAddress.addressNameRoad
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(address.addressNameRoad)
+                        .foregroundColor(.black)
+                    Text(address.addressName)
+                        .foregroundColor(.gray)
+                }
+            }
+        }
     }
 }
 
@@ -78,38 +93,41 @@ struct MakeRoomFullScreenModalView: View {
                         }
                         Spacer()
                         Button("검색") {
-                            isPresented.toggle()
-
                             let parameters: [String:Any] = ["query": deliveryAddress]
-                            let headers: HTTPHeaders = ["Authorization": "KakaoAK {REST_API_KEY}"]
-                            AF.request("https://dapi.kakao.com/v2/local/search/address.json", method: .get,
-                                       parameters: parameters, headers: headers).responseJSON() { response in
-                                        switch response.result {
-                                        case .success:
-                                            if let data = try! response.result.get() as? [String: Any] {
-                                                print(data)
-                                                if let document = data["documents"] as? [[String:Any]] {
-                                                    for item in document {
-                                                        var addressName: String = ""
-                                                        if let address = item["address"] as? [String:Any] {
-                                                            addressName = address["address_name"] as? String ?? ""
-                                                        }
-                                                        let addressNameRoad = item["address_name"] as? String ?? ""
-                                                        let longitudeX = item["x"] as? String ?? ""
-                                                        let latitudeY = item["y"] as? String ?? ""
-
-                                                        self.internalData.addressList.append(Address(addressName: addressName, addressNameRoad: addressNameRoad, longitudeX: longitudeX, latitudeY: latitudeY))
+                            let headers: HTTPHeaders = ["Authorization": "KakaoAK "]
+                            AF.request("https://dapi.kakao.com/v2/local/search/address.json", method: .get, parameters: parameters, headers: headers).responseJSON() { response in
+                                switch response.result {
+                                    case .success:
+                                        if let data = try! response.result.get() as? [String: Any] {
+                                            print(data)
+                                            if let document = data["documents"] as? [[String:Any]] {
+                                                var id = 0
+                                                internalData.addressList = []   // clear
+                                                for item in document {
+                                                    var addressName: String = ""
+                                                    if let address = item["address"] as? [String:Any] {
+                                                        addressName = address["address_name"] as? String ?? ""
                                                     }
-                                                }
-                                                print(internalData.addressList)
-                                            }
-                                        case .failure(let error):
-                                            print(error)
-                                        }
-                                       }
+                                                    let addressNameRoad = item["address_name"] as? String ?? ""
+                                                    let longitudeX = item["x"] as? String ?? ""
+                                                    let latitudeY = item["y"] as? String ?? ""
 
+                                                    self.internalData.addressList.append(Address(id: id, addressName: addressName, addressNameRoad: addressNameRoad, longitudeX: longitudeX, latitudeY: latitudeY))
+
+                                                    id += 1
+                                                }
+                                            }
+                                            print(internalData.addressList)
+                                        }
+                                    case .failure(let error):
+                                        print(error)
+                                }
+                            }
+                            isPresented.toggle()
                         }
-                        .fullScreenCover(isPresented: $isPresented, content: AddressSearchFullScreenModalView.init)
+                        .fullScreenCover(isPresented: $isPresented) {
+                            AddressSearchFullScreenModalView(deliveryAddress: $deliveryAddress)
+                        }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 7)
                         .background(
