@@ -48,10 +48,13 @@ struct ParticipantsView: View {
                                 .foregroundColor(.red)
                         }
                         Text(participant.id)
+                            .frame(width: 5)
                         Spacer()
                         Text(participant.menuName)
+                            .frame(width: 5)
                         Spacer()
                         Text(String(participant.menuPrice))
+                            .frame(width: 5)
                     }
                 }
             }

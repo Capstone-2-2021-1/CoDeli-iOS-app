@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C00C52ED6050D56C4802E3E /* Pods_CoDeliTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C13A02AC109883DB9B20B7 /* Pods_CoDeliTests.framework */; };
 		2E447E5C2EBAB3E0E44D942D /* Pods_CoDeli_CoDeliUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63770195E4A902D9FFEACD1B /* Pods_CoDeli_CoDeliUITests.framework */; };
+		6743289A266A451F002E7B2F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 67432899266A451F002E7B2F /* Alamofire */; };
 		6764126926678F4500AAF2A3 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 6764126826678F4500AAF2A3 /* SlidingTabView */; };
 		676412722667905200AAF2A3 /* SlidingTabConsumerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676412712667905200AAF2A3 /* SlidingTabConsumerView.swift */; };
 		67660CE42641A35200C3E39C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67660CE32641A35200C3E39C /* ContentView.swift */; };
@@ -126,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6743289A266A451F002E7B2F /* Alamofire in Frameworks */,
 				676ADE702667DF8E000F142D /* SwiftUIListSeparator in Frameworks */,
 				6764126926678F4500AAF2A3 /* SlidingTabView in Frameworks */,
 				8813955860E8F0325CEEEEB4 /* Pods_CoDeli.framework in Frameworks */,
@@ -300,6 +302,7 @@
 			packageProductDependencies = (
 				6764126826678F4500AAF2A3 /* SlidingTabView */,
 				676ADE6F2667DF8E000F142D /* SwiftUIListSeparator */,
+				67432899266A451F002E7B2F /* Alamofire */,
 			);
 			productName = CoDeli;
 			productReference = 679F02FE2621CBDE00FD0223 /* CoDeli.app */;
@@ -379,6 +382,7 @@
 			packageReferences = (
 				6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 				676ADE6E2667DF8E000F142D /* XCRemoteSwiftPackageReference "SwiftUIListSeparator" */,
+				67432898266A451F002E7B2F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 679F02FF2621CBDE00FD0223 /* Products */;
 			projectDirPath = "";
@@ -945,6 +949,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		67432898266A451F002E7B2F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.3;
+			};
+		};
 		6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
@@ -964,6 +976,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		67432899266A451F002E7B2F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67432898266A451F002E7B2F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		6764126826678F4500AAF2A3 /* SlidingTabView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6764126726678F4500AAF2A3 /* XCRemoteSwiftPackageReference "SlidingTabView" */;

@@ -279,8 +279,8 @@ struct RoomDetailView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
 
                         ParticipantsView(isChatView: false)
-                            .padding(.leading)
-                            .padding(.trailing)
+                            .padding(.leading, 3)
+                            .padding(.trailing, 3)
                     }
                 })
                 .navigationBarTitle(room.restaurant)

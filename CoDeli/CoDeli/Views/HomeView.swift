@@ -7,6 +7,17 @@
 
 import SwiftUI
 import FirebaseFirestore
+import Alamofire
+
+struct AddressSearchFullScreenModalView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    @State private var deliveryAddress: String = ""
+
+    var body: some View {
+        Text("도로명 주소")
+    }
+}
 
 struct MakeRoomFullScreenModalView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -17,13 +28,15 @@ struct MakeRoomFullScreenModalView: View {
 
     @State private var restaurant: String = ""
     @State private var deliveryApp: String = ""
-    @State private var deliveryAddress: String = "서울 동작구 흑석로84"
+    @State private var deliveryAddress: String = ""
     @State private var deliveryDetailAddress: String = ""
     @State private var minOrderAmount: String = ""
     @State private var deliveryCost: String = ""
     @State private var participantsMax: UInt = 0
 
     @State private var isEditing = false
+
+    @State private var isPresented = false
 
     init() {
         UINavigationBarAppearance()
@@ -55,11 +68,48 @@ struct MakeRoomFullScreenModalView: View {
                 }
                 Section(header: Text("배달 장소")) {
                     HStack {
-                        Text("서울시 동작구 흑석로84")
+                        TextField(
+                            "도로명 주소 (혹은 지번 주소)",
+                            text: $deliveryAddress
+                        ) { isEditing in
+                            self.isEditing = isEditing
+                        } onCommit: {
+                //            validate(name: username)
+                        }
                         Spacer()
                         Button("검색") {
-                            print("검색 버튼 눌림!")
+                            isPresented.toggle()
+
+                            let parameters: [String:Any] = ["query": deliveryAddress]
+                            let headers: HTTPHeaders = ["Authorization": "KakaoAK {REST_API_KEY}"]
+                            AF.request("https://dapi.kakao.com/v2/local/search/address.json", method: .get,
+                                       parameters: parameters, headers: headers).responseJSON() { response in
+                                        switch response.result {
+                                        case .success:
+                                            if let data = try! response.result.get() as? [String: Any] {
+                                                print(data)
+                                                if let document = data["documents"] as? [[String:Any]] {
+                                                    for item in document {
+                                                        var addressName: String = ""
+                                                        if let address = item["address"] as? [String:Any] {
+                                                            addressName = address["address_name"] as? String ?? ""
+                                                        }
+                                                        let addressNameRoad = item["address_name"] as? String ?? ""
+                                                        let longitudeX = item["x"] as? String ?? ""
+                                                        let latitudeY = item["y"] as? String ?? ""
+
+                                                        self.internalData.addressList.append(Address(addressName: addressName, addressNameRoad: addressNameRoad, longitudeX: longitudeX, latitudeY: latitudeY))
+                                                    }
+                                                }
+                                                print(internalData.addressList)
+                                            }
+                                        case .failure(let error):
+                                            print(error)
+                                        }
+                                       }
+
                         }
+                        .fullScreenCover(isPresented: $isPresented, content: AddressSearchFullScreenModalView.init)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 7)
                         .background(
