@@ -193,7 +193,7 @@ struct MakeRoomFullScreenModalView: View {
                         print("완료 버튼 눌림!")
 
                         // 방장에게는 현재 방이 자신이 만든 방
-                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname)
+                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname, longitudeX: internalData.selectedAddress.longitudeX, latitudeY: internalData.selectedAddress.latitudeY)
 
                         db.collection("Rooms").document(String(firestoreData.rooms.count)).setData([
                             "restaurant": restaurant,
@@ -205,7 +205,9 @@ struct MakeRoomFullScreenModalView: View {
                             "deliveryDetailAddress": deliveryDetailAddress,
                             "participantsNum": 1,
                             "participantsMax": participantsMax,
-                            "owner": realtimeData.myInfo.nickname
+                            "owner": realtimeData.myInfo.nickname,
+                            "x": internalData.selectedAddress.longitudeX,
+                            "y": internalData.selectedAddress.latitudeY
                         ]) { err in
                             if let err = err {
                                 print("Error writing document: \(err)")

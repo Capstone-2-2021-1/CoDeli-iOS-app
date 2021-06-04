@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class InternalData: ObservableObject {
-    @Published var currentRoom: Room = Room(id: -1, restaurant: "", deliveryApp: "", currentValue: 0, minOrderAmount: 0, deliveryCost: 0, deliveryAddress: "", deliveryDetailAddress: "", participantsNum: 0, participantsMax: 0, owner: "")
+    @Published var currentRoom: Room = Room(id: -1, restaurant: "", deliveryApp: "", currentValue: 0, minOrderAmount: 0, deliveryCost: 0, deliveryAddress: "", deliveryDetailAddress: "", participantsNum: 0, participantsMax: 0, owner: "", longitudeX: "", latitudeY: "")
 
 //    @Published var myOrderInfo = MyOrderInfo(menuName: "", menuPrice: 0)
     @Published var addressList = [Address]()

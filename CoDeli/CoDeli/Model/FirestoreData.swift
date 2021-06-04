@@ -34,7 +34,9 @@ final class FirestoreData: ObservableObject {
                 let participantsNum = data["participantsNum"] as? UInt ?? 0
                 let participantsMax = data["participantsMax"] as? UInt ?? 0
                 let owner = data["owner"] as? String ?? ""
-                return Room(id: Int(id) ?? 0, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax, owner: owner)
+                let longitudeX = data["x"] as? String ?? ""
+                let latitudeY = data["y"] as? String ?? ""
+                return Room(id: Int(id) ?? 0, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: currentValue, minOrderAmount: minOrderAmount, deliveryCost: deliveryCost, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: participantsNum, participantsMax: participantsMax, owner: owner, longitudeX: longitudeX, latitudeY: latitudeY)
             }
         }
     }
@@ -52,4 +54,6 @@ struct Room: Hashable, Codable, Identifiable {
     var participantsNum: UInt
     var participantsMax: UInt
     var owner: String
+    var longitudeX: String
+    var latitudeY: String
 }
