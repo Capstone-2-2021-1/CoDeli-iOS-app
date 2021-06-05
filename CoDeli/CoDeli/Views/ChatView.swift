@@ -7,27 +7,31 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
 import SlidingTabView
 
 struct ChatView: View {
     // SlidingTabView
     @State private var selectedTabIndex = 0
 
+    @EnvironmentObject var firestoreData: FirestoreData
     @EnvironmentObject var realtimeData: RealtimeData
     @EnvironmentObject var internalData: InternalData
 
+    private var db = Firestore.firestore()
     var ref: DatabaseReference! = Database.database().reference()
 
     @State private var message: String = ""
 
     // 약속 시간 설정
     @State private var showingActionSheet = false
+    @State private var appointmentTime: String = ""
 
     var body: some View {
         let room: Room = internalData.currentRoom
 
         // 방장이면 방장뷰 보여주기
-        if true || internalData.currentRoom.owner == realtimeData.myInfo.nickname || internalData.currentRoom.id >= 0 {
+        if internalData.currentRoom.owner == realtimeData.myInfo.nickname || internalData.currentRoom.id >= 0 {
             NavigationView {
                 VStack(alignment: .leading) {
                     SlidingTabView(selection: self.$selectedTabIndex, tabs: ["준비", "채팅"])
@@ -37,8 +41,8 @@ struct ChatView: View {
                                 VStack(alignment: .leading, spacing: 5, content: {
                                     Text("최소주문금액: \(room.minOrderAmount)")
                                         .fontWeight(.bold)
-//                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
-                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost)원)")
+                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
+//                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost)원)")
 
                                         .fontWeight(.bold)
                                 })
@@ -70,12 +74,12 @@ struct ChatView: View {
                                 Text("사용 플랫폼: \(room.deliveryApp)")
                                 Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
                                 HStack {
-                                    Text("약속시간: ")
+                                    Text("약속시간: \(appointmentTime)")
 
                                     Spacer()
 
                                     // 방장: 배달 음식 도착 소요시간 입력
-                                    if true || internalData.currentRoom.owner == realtimeData.myInfo.nickname {
+                                    if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
                                         Button("시간 설정") {
                                             showingActionSheet = true
                                         }
@@ -99,11 +103,41 @@ struct ChatView: View {
                         })
                         .actionSheet(isPresented: $showingActionSheet) {
                             ActionSheet(title: Text("약속시간 설정"), message: Text("배달이 도착하는데 걸리는 시간을 알려주세요!"), buttons: [
-                                .default(Text("20분")) { print("20분") },
-                                .default(Text("30분")) { print("30분") },
-                                .default(Text("40분")) { print("40분") },
-                                .default(Text("50분")) { print("50분") },
-                                .default(Text("60분")) { print("50분") },
+                                .default(Text("2분")) {  // 최종 데모용
+                                    let df = DateFormatter()
+                                    df.dateFormat = "MM/dd HH:mm"
+
+                                    var date = Date()
+                                    print(df.string(from: date))
+
+                                    date = date + 2 * 60
+                                    appointmentTime = df.string(from: date)
+
+                                    db.collection("Rooms").document(String(internalData.currentRoom.id)).updateData([
+                                        "time": appointmentTime
+                                    ]) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
+                                            print("Document successfully written!")
+                                        }
+                                    }
+                                },
+                                .default(Text("20분")) {
+                                    print("20분")
+                                },
+                                .default(Text("30분")) {
+                                    print("30분")
+                                },
+                                .default(Text("40분")) {
+                                    print("40분")
+                                },
+                                .default(Text("50분")) {
+                                    print("50분")
+                                },
+                                .default(Text("60분")) {
+                                    print("60분")
+                                },
                                 .cancel()
                             ])
                         }

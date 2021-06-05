@@ -95,6 +95,7 @@ struct MakeRoomFullScreenModalView: View {
                         Button("검색") {
                             let parameters: [String:Any] = ["query": deliveryAddress]
                             let headers: HTTPHeaders = ["Authorization": "KakaoAK {REST_API_KEY}"]
+
                             AF.request("https://dapi.kakao.com/v2/local/search/address.json", method: .get, parameters: parameters, headers: headers).responseJSON() { response in
                                 switch response.result {
                                     case .success:
@@ -193,7 +194,7 @@ struct MakeRoomFullScreenModalView: View {
                         print("완료 버튼 눌림!")
 
                         // 방장에게는 현재 방이 자신이 만든 방
-                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname, longitudeX: internalData.selectedAddress.longitudeX, latitudeY: internalData.selectedAddress.latitudeY)
+                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname, longitudeX: internalData.selectedAddress.longitudeX, latitudeY: internalData.selectedAddress.latitudeY, appointmentTime: "")
 
                         db.collection("Rooms").document(String(firestoreData.rooms.count)).setData([
                             "restaurant": restaurant,
