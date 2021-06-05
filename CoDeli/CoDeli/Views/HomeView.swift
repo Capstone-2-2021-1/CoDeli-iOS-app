@@ -94,7 +94,7 @@ struct MakeRoomFullScreenModalView: View {
                         Spacer()
                         Button("검색") {
                             let parameters: [String:Any] = ["query": deliveryAddress]
-                            let headers: HTTPHeaders = ["Authorization": "KakaoAK "]
+                            let headers: HTTPHeaders = ["Authorization": "KakaoAK {REST_API_KEY}"]
                             AF.request("https://dapi.kakao.com/v2/local/search/address.json", method: .get, parameters: parameters, headers: headers).responseJSON() { response in
                                 switch response.result {
                                     case .success:

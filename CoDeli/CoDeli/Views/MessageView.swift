@@ -52,8 +52,10 @@ struct MessageView: View {
         if #available(iOS 14, *) {
             ScrollView {
                 LazyVStack(spacing: 10) {
-                    ForEach(0...realtimeData.messages.count-1, id: \.self) { i in
-                        MessageCell(message: realtimeData.messages[i], isCurrentUser: realtimeData.messages[i].isCurrentUser)
+                    if realtimeData.messages.count > 0 {
+                        ForEach(0...realtimeData.messages.count-1, id: \.self) { i in
+                            MessageCell(message: realtimeData.messages[i], isCurrentUser: realtimeData.messages[i].isCurrentUser)
+                        }
                     }
                 }
             }

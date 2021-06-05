@@ -7,8 +7,12 @@
 
 import SwiftUI
 import Firebase
+import SlidingTabView
 
 struct ChatView: View {
+    // SlidingTabView
+    @State private var selectedTabIndex = 0
+
     @EnvironmentObject var realtimeData: RealtimeData
     @EnvironmentObject var internalData: InternalData
 
@@ -22,96 +26,102 @@ struct ChatView: View {
         // 방장이면 방장뷰 보여주기
         if internalData.currentRoom.owner == realtimeData.myInfo.nickname || internalData.currentRoom.id >= 0 {
             NavigationView {
-                VStack(alignment: .leading, spacing: 10, content: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5, content: {
-                            Text("최소주문금액: \(room.minOrderAmount)")
-                                .fontWeight(.bold)
-                            Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
-                                .fontWeight(.bold)
+                VStack(alignment: .leading) {
+                    SlidingTabView(selection: self.$selectedTabIndex, tabs: ["준비", "채팅"])
+                    if selectedTabIndex == 0 {
+                        VStack(alignment: .leading, spacing: 10, content: {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 5, content: {
+                                    Text("최소주문금액: \(room.minOrderAmount)")
+                                        .fontWeight(.bold)
+                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
+                                        .fontWeight(.bold)
+                                })
+                                .font(.system(size: 21, design: .rounded))
+
+                                Spacer()
+
+                                Button(internalData.currentRoom.owner == realtimeData.myInfo.nickname ? "지급\n요청" : "도착\n확인") {
+                                    if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
+                                        ref.child("Chat/\(room.id)/verification").updateChildValues(
+                                            ["trigger": true,
+                                             "room_manager_wallet": realtimeData.myInfo.klipAddress]
+                                        )
+                                    } else {
+                                        ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
+                                    }
+                                }
+                                .frame(width: 80, height: 80)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color(hex:0x41c072))
+                                        .shadow(color: .gray, radius: 2, x: 0, y: 2))
+                                .foregroundColor(.white)
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
+                            }
+                            .padding([.top, .leading, .trailing], 3)
+
+                            VStack(alignment: .leading, spacing: 5, content: {
+                                Text("사용 플랫폼: \(room.deliveryApp)")
+                                Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
+                                Text("약속시간: ")
+                            })
+                            .font(.subheadline)
+                            .padding([.leading], 3)
+                            .padding([.bottom], 10)
+
+                            ParticipantsView(isChatView: true)
+                                .padding([.leading, .trailing], 3)
                         })
-                        .font(.system(size: 21, design: .rounded))
+                    } else if selectedTabIndex == 1 {
+                        MessageView()
 
-                        Spacer()
-
-                        Button(internalData.currentRoom.owner == realtimeData.myInfo.nickname ? "지급\n요청" : "도착\n확인") {
-                            if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
-                                ref.child("Chat/\(room.id)/verification").updateChildValues(
-                                    ["trigger": true,
-                                     "room_manager_wallet": realtimeData.myInfo.klipAddress]
+                        ZStack {
+                            HStack {
+                                TextField(
+                                    "보낼 메시지를 입력하세요",
+                                    text: $message
                                 )
-                            } else {
-                                ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
-                            }
-                        }
-                        .frame(width: 80, height: 80)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(hex:0x41c072))
-                                .shadow(color: .gray, radius: 2, x: 0, y: 2))
-                        .foregroundColor(.white)
-                        .font(.system(size: 25, weight: .bold, design: .rounded))
-                    }
-                    .padding([.top, .leading, .trailing], 3)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                    VStack(alignment: .leading, spacing: 5, content: {
-                        Text("사용 플랫폼: \(room.deliveryApp)")
-                        Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
-                        Text("약속시간: ")
-                    })
-                    .font(.subheadline)
-                    .padding([.leading], 3)
-                    .padding([.bottom], 5)
+                                Spacer()
 
-                    ParticipantsView(isChatView: true)
-                        .padding([.leading, .trailing], 3)
+                                Button(action: {
+                                    let date = Date()
+                                    let df = DateFormatter()
 
-                    MessageView()
+                                    df.dateFormat = "HHmmss"
+                                    let messageId = df.string(from: date)
 
-                    ZStack {
-                        HStack {
-                            TextField(
-                                "보낼 메시지를 입력하세요",
-                                text: $message
-                            )
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    df.dateFormat = "HH:mm"
 
-                            Spacer()
+                                    ref.child("Chat/\(room.id)/chat/\(messageId)").setValue(
+                                        ["message": message,
+                                         "name": realtimeData.myInfo.nickname,
+                                         "time": df.string(from: date)]
+                                    )
 
-                            Button(action: {
-                                let date = Date()
-                                let df = DateFormatter()
+                                    hideKeyboard()
+                                    // 메시지 창 clear
+                                    self.message = ""
 
-                                df.dateFormat = "HHmmss"
-                                let messageId = df.string(from: date)
-
-                                df.dateFormat = "HH:mm"
-
-                                ref.child("Chat/\(room.id)/chat/\(messageId)").setValue(
-                                    ["message": message,
-                                     "name": realtimeData.myInfo.nickname,
-                                     "time": df.string(from: date)]
+                                    print("메시지 보내기 버튼 눌림!")
+                                }) {
+                                    Image(systemName: "paperplane")
+                                }
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color(hex:0x42c273))
                                 )
-
-                                hideKeyboard()
-                                // 메시지 창 clear
-                                self.message = ""
-
-                                print("메시지 보내기 버튼 눌림!")
-                            }) {
-                                Image(systemName: "paperplane")
                             }
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                            .background(
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color(hex:0x42c273))
-                            )
+                            .padding(5)
                         }
-                        .padding(5)
+                        .background(Color(hex:0x4caece))
                     }
-                    .background(Color(hex:0x4caece))
-                })
+                    Spacer()
+                }
                 .navigationBarTitle(room.restaurant, displayMode: .inline)
                 .onAppear() {
                     self.realtimeData.fetchData(roomId: room.id)

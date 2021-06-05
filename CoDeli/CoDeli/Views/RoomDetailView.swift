@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 import Firebase
 import KlipSDK
 import SlidingTabView
@@ -344,8 +345,7 @@ struct RoomDetailView: View {
                 }
                 .background(Color(hex:0x4caece))
             }
-
-            Spacer()
+            Spacer()    // SlidingTabView를 위로 올리기 위해
         }
     }
 }
