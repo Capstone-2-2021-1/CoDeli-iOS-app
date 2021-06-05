@@ -10,6 +10,27 @@ import Firebase
 import FirebaseFirestore
 import SlidingTabView
 
+import CoreLocation
+
+class LocationFetcher: NSObject, CLLocationManagerDelegate {
+    let manager = CLLocationManager()
+    var lastKnownLocation: CLLocationCoordinate2D?
+
+    override init() {
+        super.init()
+        manager.delegate = self
+    }
+
+    func start() {
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        lastKnownLocation = locations.first?.coordinate
+    }
+}
+
 struct ChatView: View {
     // SlidingTabView
     @State private var selectedTabIndex = 0
@@ -27,11 +48,15 @@ struct ChatView: View {
     @State private var showingActionSheet = false
     @State private var appointmentTime: String = ""
 
+    // 위치 인식
+    let locationFetcher = LocationFetcher()
+    @State private var arrived = false
+
     var body: some View {
         let room: Room = internalData.currentRoom
 
         // 방장이면 방장뷰 보여주기
-        if internalData.currentRoom.owner == realtimeData.myInfo.nickname || internalData.currentRoom.id >= 0 {
+        if true || internalData.currentRoom.owner == realtimeData.myInfo.nickname || internalData.currentRoom.id >= 0 {
             NavigationView {
                 VStack(alignment: .leading) {
                     SlidingTabView(selection: self.$selectedTabIndex, tabs: ["준비", "채팅"])
@@ -41,8 +66,8 @@ struct ChatView: View {
                                 VStack(alignment: .leading, spacing: 5, content: {
                                     Text("최소주문금액: \(room.minOrderAmount)")
                                         .fontWeight(.bold)
-                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
-//                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost)원)")
+//                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
+                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost)원)")
 
                                         .fontWeight(.bold)
                                 })
@@ -50,14 +75,29 @@ struct ChatView: View {
 
                                 Spacer()
 
-                                Button(internalData.currentRoom.owner == realtimeData.myInfo.nickname ? "지급\n요청" : "도착\n확인") {
+                                Button(internalData.currentRoom.owner == realtimeData.myInfo.nickname ? "지급\n요청" : arrived ? "수령\n확인" : "도착\n확인") {
                                     if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
                                         ref.child("Chat/\(room.id)/verification").updateChildValues(
                                             ["trigger": true,
                                              "room_manager_wallet": realtimeData.myInfo.klipAddress]
                                         )
                                     } else {
-                                        ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
+                                        if arrived == false {
+                                            self.locationFetcher.start()
+
+                                            if let location = self.locationFetcher.lastKnownLocation {
+                                                print("Your location is \(location)")
+
+                                                ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["x": location.longitude, "y": location.latitude])
+
+                                                arrived = true
+                                            } else {
+                                                print("Your location is unknown")
+                                            }
+
+                                        } else {
+                                            ref.child("Chat/\(room.id)/partitions/\(realtimeData.myInfo.nickname)").updateChildValues(["verification_status": true])
+                                        }
                                     }
                                 }
                                 .frame(width: 80, height: 80)
