@@ -35,11 +35,9 @@ struct ChatView: View {
     // SlidingTabView
     @State private var selectedTabIndex = 0
 
-    @EnvironmentObject var firestoreData: FirestoreData
     @EnvironmentObject var realtimeData: RealtimeData
     @EnvironmentObject var internalData: InternalData
 
-    private var db = Firestore.firestore()
     var ref: DatabaseReference! = Database.database().reference()
 
     @State private var message: String = ""
@@ -67,7 +65,7 @@ struct ChatView: View {
                                     Text("최소주문금액: \(room.minOrderAmount)")
                                         .fontWeight(.bold)
 //                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost/room.participantsMax)원)")
-                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost)원)")
+                                    Text("배달팁: \(room.deliveryCost) (1인당 \(room.deliveryCost)원)")   // for debug
 
                                         .fontWeight(.bold)
                                 })
@@ -114,7 +112,14 @@ struct ChatView: View {
                                 Text("사용 플랫폼: \(room.deliveryApp)")
                                 Text("배달장소: \(room.deliveryAddress) \(room.deliveryDetailAddress)")
                                 HStack {
-                                    Text("약속시간: \(appointmentTime)")
+                                    if internalData.currentRoom.owner == realtimeData.myInfo.nickname {
+                                        Text("약속시간: \(appointmentTime)")
+                                    } else {
+                                        Text("약속시간: \(realtimeData.appointmentTime)")
+                                    }
+
+                                    // 그냥 아래 한 줄로 줄여도 무방할듯
+//                                    Text("약속시간: \(realtimeData.appointmentTime)")
 
                                     Spacer()
 
@@ -153,15 +158,20 @@ struct ChatView: View {
                                     date = date + 2 * 60
                                     appointmentTime = df.string(from: date)
 
-                                    db.collection("Rooms").document(String(internalData.currentRoom.id)).updateData([
-                                        "time": appointmentTime
-                                    ]) { err in
-                                        if let err = err {
-                                            print("Error writing document: \(err)")
-                                        } else {
-                                            print("Document successfully written!")
-                                        }
-                                    }
+                                    ref.child("Chat/\(room.id)/appointmentTime").setValue(
+                                        appointmentTime
+                                    )
+
+                                    // Firestore에 약속 시간 올리는 방식
+//                                    db.collection("Rooms").document(String(internalData.currentRoom.id)).updateData([
+//                                        "time": appointmentTime
+//                                    ]) { err in
+//                                        if let err = err {
+//                                            print("Error writing document: \(err)")
+//                                        } else {
+//                                            print("Document successfully written!")
+//                                        }
+//                                    }
                                 },
                                 .default(Text("20분")) {
                                     print("20분")

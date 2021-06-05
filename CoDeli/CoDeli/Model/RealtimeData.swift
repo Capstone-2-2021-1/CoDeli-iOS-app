@@ -13,6 +13,7 @@ final class RealtimeData: ObservableObject {
     @Published var participants = [Participant]()
     @Published var messages = [Message]()
 
+    @Published var appointmentTime: String = ""
     @Published var klayValue: UInt = 0
     
     //dummy
@@ -49,7 +50,8 @@ final class RealtimeData: ObservableObject {
                                 sendingStatus: infoDict["sendingStatus"] as? String ?? "",
                                 expirationTime: infoDict["expiration_time"] as? TimeInterval ?? 0,
                                 verificationStatus: infoDict["verification_status"] as? Bool ?? false,
-                                verification: infoDict["verification"] as? Bool ?? false)
+                                verification: infoDict["verification"] as? Bool ?? false,
+                                location_verification_status: infoDict["location_verification_status"] as? Bool ?? false)
                 )
                 print(self.participants)
             }
@@ -79,6 +81,11 @@ final class RealtimeData: ObservableObject {
                 )
             }
             self.messages.sort(by: {$0.id < $1.id})
+        })
+
+        // 약속 시간 가져오기
+        ref.child("Chat/\(roomId)/appointmentTime").observe(DataEventType.value, with: { (snapshot) in
+            self.appointmentTime = snapshot.value as? String ?? ""
         })
     }
 
@@ -115,6 +122,7 @@ struct Participant: Hashable, Codable, Identifiable {
     var expirationTime: TimeInterval
     var verificationStatus: Bool
     var verification: Bool
+    var location_verification_status: Bool
 }
 
 struct Message: Hashable, Codable, Identifiable {

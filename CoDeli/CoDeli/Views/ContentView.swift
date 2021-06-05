@@ -20,14 +20,14 @@ struct ContentView: View {
 
     var body: some View {
         // for debug - 로그인 생략
-//        return AnyView(MainView())
+        return AnyView(MainView())
 
-        if info.isSignIn == .success {
-            return AnyView(SignUpView(info: info))
-        } else if info.isSignIn == .complete {
-            return AnyView(MainView())
-        } else {
-            return AnyView(SignInView())
-        }
+//        if info.isSignIn == .success {
+//            return AnyView(SignUpView(info: info))
+//        } else if info.isSignIn == .complete {
+//            return AnyView(MainView())
+//        } else {
+//            return AnyView(SignInView())
+//        }
     }
 }

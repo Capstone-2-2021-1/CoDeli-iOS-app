@@ -194,7 +194,7 @@ struct MakeRoomFullScreenModalView: View {
                         print("완료 버튼 눌림!")
 
                         // 방장에게는 현재 방이 자신이 만든 방
-                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname, longitudeX: internalData.selectedAddress.longitudeX, latitudeY: internalData.selectedAddress.latitudeY, appointmentTime: "")
+                        internalData.currentRoom = Room(id: firestoreData.rooms.count, restaurant: restaurant, deliveryApp: deliveryApp, currentValue: 0, minOrderAmount: UInt(minOrderAmount) ?? 0, deliveryCost: UInt(deliveryCost) ?? 0, deliveryAddress: deliveryAddress, deliveryDetailAddress: deliveryDetailAddress, participantsNum: 1, participantsMax: participantsMax, owner: realtimeData.myInfo.nickname, longitudeX: internalData.selectedAddress.longitudeX, latitudeY: internalData.selectedAddress.latitudeY)
 
                         db.collection("Rooms").document(String(firestoreData.rooms.count)).setData([
                             "restaurant": restaurant,
@@ -230,6 +230,8 @@ struct HomeView: View {
     @EnvironmentObject var firestoreData: FirestoreData
     @EnvironmentObject var realtimeData: RealtimeData
 
+//    @EnvironmentObject var internalData: InternalData   // for debug
+
     @State private var showingSheet = false
 
     var body: some View {
@@ -239,6 +241,9 @@ struct HomeView: View {
                     NavigationLink(destination: RoomDetailView(room: room)) {
                         HomeRow(room: room)
                     }
+//                    .simultaneousGesture(TapGesture().onEnded { // for debug
+//                        internalData.currentRoom = room
+//                    })
                 }
 
                 VStack {
