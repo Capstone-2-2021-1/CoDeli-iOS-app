@@ -23,20 +23,53 @@ struct ParticipantsView: View {
                         if participant.id != realtimeData.myInfo.nickname {
                             HStack {
                                 if participant.status { // true
-                                    Circle()
-                                        .frame(width: 5, height: 5)
-                                        .foregroundColor(.green)
+                                    Text(participant.id)
+                                        .frame(width: 80, height: 25)
+                                        .foregroundColor(.white)
+                                        .background(Color.green)
+                                        .clipShape(Capsule())
+
+//                                    Circle()
+//                                        .frame(width: 5, height: 5)
+//                                        .foregroundColor(.green)
                                 } else {
-                                    Circle()
-                                        .frame(width: 5, height: 5)
-                                        .foregroundColor(.red)
+                                    Text(participant.id)
+                                        .frame(width: 80, height: 25)
+                                        .foregroundColor(.white)
+                                        .background(Color.red)
+                                        .clipShape(Capsule())
+
+//                                    Circle()
+//                                        .frame(width: 5, height: 5)
+//                                        .foregroundColor(.red)
                                 }
-                                Text(participant.id)
                                 Spacer()
+
                                 Text(participant.menuName)
+                                    .frame(width: 150, height: 25)
+                                    .overlay(
+                                        Capsule(style: .continuous)
+                                            .stroke(Color(hex: 0xdddddb))
+                                    )
+                                    .background(Capsule().fill(Color.white))
+
                                 Spacer()
+
                                 Text(String(participant.menuPrice))
+                                    .frame(width: 80, height: 25)
+                                    .overlay(
+                                        Capsule(style: .continuous)
+                                            .stroke(Color(hex: 0xdddddb))
+                                    )
+                                    .background(Capsule().fill(Color.white))
+
                             }
+                            .padding(7)
+                            .overlay(
+                                Capsule(style: .continuous)
+                                    .stroke(Color(hex: 0xdddddb))
+                            )
+                            .background(Capsule().fill(Color.white))
                         }
                     } else {    // ChatView이면 본인까지 출력
                         HStack(alignment: .lastTextBaseline) {

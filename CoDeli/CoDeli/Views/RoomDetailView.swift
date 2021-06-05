@@ -131,6 +131,18 @@ struct PaymentFullScreenModalView: View {
     }
 }
 
+struct MyTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .frame(height: 25)
+            .overlay(
+                Capsule(style: .continuous)
+                    .stroke(Color(hex: 0xdddddb))
+            )
+            .background(Capsule().fill(Color.white))
+    }
+}
+
 struct RoomDetailView: View {
     // SlidingTabView
     @State private var selectedTabIndex = 0
@@ -254,34 +266,63 @@ struct RoomDetailView: View {
 
                     // 내 메뉴 이름, 가격 입력 받음
                     VStack {
-                        HStack {
+                        HStack(alignment: .lastTextBaseline) {
                             if status {
-                                Circle()
-                                    .frame(width: 5, height: 5)
-                                    .foregroundColor(.green)
+                                Text(realtimeData.myInfo.nickname)
+                                    .frame(width: 80, height: 25)
+                                    .foregroundColor(.white)
+                                    .background(Color.green)
+                                    .clipShape(Capsule())
+
+//                                Circle()
+//                                    .frame(width: 5, height: 5)
+//                                    .foregroundColor(.green)
                             } else {
-                                Circle()
-                                    .frame(width: 5, height: 5)
-                                    .foregroundColor(.red)
+                                Text(realtimeData.myInfo.nickname)
+                                    .frame(width: 80, height: 25)
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
+                                    .clipShape(Capsule())
+
+//                                Circle()
+//                                    .frame(width: 5, height: 5)
+//                                    .foregroundColor(.red)
                             }
-                            Text(realtimeData.myInfo.nickname)
+
+                            Spacer()
+
                             TextField(
                                 "메뉴 이름",
                                 text: $menuName
                             )
+                            .multilineTextAlignment(.center)
+                            .frame(width: 150)
+
+                            Spacer()
+
                             TextField(
-                                "메뉴 가격",
+                                "가격",
                                 text: $menuPrice
                             )
+                            .multilineTextAlignment(.center)
+                            .frame(width: 80)
                             .keyboardType(.numberPad)
                         }
-                        .padding(.leading)
-                        .padding(.trailing)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(7)
+                        .overlay(
+                            Capsule(style: .continuous)
+                                .stroke(Color(hex: 0xdddddb))
+                        )
+                        .background(Capsule().fill(Color.white))
+//                        .padding(.leading)
+//                        .padding(.trailing)
+                        .textFieldStyle(MyTextFieldStyle())
+//                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding([.leading, .trailing], 3)
 
                         ParticipantsView(isChatView: false)
-                            .padding(.leading, 3)
-                            .padding(.trailing, 3)
+                            .padding([.leading, .trailing], 3)
+
                     }
                 })
                 .navigationBarTitle(room.restaurant)
