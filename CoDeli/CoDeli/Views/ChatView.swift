@@ -144,7 +144,7 @@ struct ChatView: View {
                             .padding([.bottom], 10)
 
                             ParticipantsView(isChatView: true)
-                                .padding([.leading, .trailing], 3)
+                                .padding([.top, .leading, .trailing], 5)
                         })
                         .actionSheet(isPresented: $showingActionSheet) {
                             ActionSheet(title: Text("약속시간 설정"), message: Text("배달이 도착하는데 걸리는 시간을 알려주세요!"), buttons: [

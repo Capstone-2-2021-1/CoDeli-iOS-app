@@ -230,7 +230,7 @@ struct HomeView: View {
     @EnvironmentObject var firestoreData: FirestoreData
     @EnvironmentObject var realtimeData: RealtimeData
 
-//    @EnvironmentObject var internalData: InternalData   // for debug
+    @EnvironmentObject var internalData: InternalData   // for debug
 
     @State private var showingSheet = false
 
