@@ -52,7 +52,7 @@ Klip 결제 요청&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 2. 준비 & 결제
    - 각자 주문할 메뉴를 선택하고 가격을 입력.
    - 채팅을 통해 참여자들끼리 소통 가능.
-   - 모두 준비 완료하면 결제 시작 → 코인원 현재 시세로 '원화(₩) ~ 클레이(KLAY)' 변환 → 카카오톡 내의 Klip으로 이동해 결제.
+   - 모두 준비 완료하면 결제 시작 → 코인원 시세로 '원화(₩)~클레이(KLAY)' 변환 → 카카오톡 내의 Klip으로 이동해 결제.
 ```
 ```
 3. 수령
@@ -72,4 +72,5 @@ Klip 결제 요청&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 ---
 
 안드로이드, 서버 관련 Repository는 아래의 Organization을 참고해주세요.
+
 https://github.com/Capstone-2-2021-1
