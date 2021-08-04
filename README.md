@@ -16,15 +16,23 @@
 - 도착 확인 버튼, 위치 인식
 
 ## User Interface (UI)
-방목록화면&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 준비화면&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 방 목록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 방 만들기
 
+<img width="200" src="https://user-images.githubusercontent.com/38272356/128149122-dc95a9da-dbc6-47b9-a07d-525e200a7b17.PNG">&nbsp;&nbsp;&nbsp;
 <img width="200" src="https://user-images.githubusercontent.com/38272356/128144946-17376b2b-dc1f-44eb-86e3-97d85351abde.jpeg">&nbsp;&nbsp;&nbsp;
+<img width="200" src="https://user-images.githubusercontent.com/38272356/128149437-bddcb2ef-ab94-4e0a-95bd-51b9b6932e4c.PNG">&nbsp;&nbsp;&nbsp;
+
+메뉴 선택 & 준비&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 채팅&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 클레이튼 결제
+
 <img width="200" src="https://user-images.githubusercontent.com/38272356/128144276-bd05b8cc-262a-4d56-b1cf-76f984e148e2.PNG">&nbsp;&nbsp;&nbsp;
-
-채팅화면&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 결제화면
-
 <img width="200" src="https://user-images.githubusercontent.com/38272356/128144280-8296e140-a008-40f1-8d82-5e030cc83d2e.PNG">&nbsp;&nbsp;&nbsp;
 <img width="200" src="https://user-images.githubusercontent.com/38272356/128145489-b1693982-476f-4b07-86ef-b8eff82d4948.PNG">&nbsp;&nbsp;&nbsp;
+
+Klip 결제 요청&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 위치 & 도착 확인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 설정
+
+<img width="200" src="https://user-images.githubusercontent.com/38272356/128150439-0be989cc-5c58-4858-98da-5b495c7deafd.png">&nbsp;&nbsp;&nbsp;
+<img width="200" src="https://user-images.githubusercontent.com/38272356/128150510-275a243a-bd56-4a55-b826-df177d31b671.PNG">&nbsp;&nbsp;&nbsp;
+<img width="200" src="https://user-images.githubusercontent.com/38272356/128150715-61781e06-5a64-4143-bf89-896d6919bb17.PNG">&nbsp;&nbsp;&nbsp;
 
 ## 사용방법
 1. 방 생성하기 (방장), 방 참여하기 (참여자)
