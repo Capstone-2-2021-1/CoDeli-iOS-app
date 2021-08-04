@@ -6,14 +6,22 @@
 
 
 ## 1. 프로젝트 소개 및 특징
-**'최소주문금액'과 '배달팁'에 대한 부담을 줄이기 위한 배달 음식 공동 주문 앱**
 
-<pre><code>1. 암호화폐를 이용하여 각자 금액만큼 결제
-   - 클레이튼(Klaytn)을 이용해 수수료 감소</code></pre>
-<pre><code>2. 기존의 배달음식 주문 플랫폼 이용 가능
-   - 배달의 민족, 요기요, 쿠팡이츠 등</code></pre>
-<pre><code>3. 배달 음식 수령까지 안전 보장
-   - 도착 확인 버튼, 위치 인식</code></pre>
+<img width="500" alt="Screen Shot 2021-08-04 at 9 38 41 PM" src="https://user-images.githubusercontent.com/38272356/128182042-ba152667-66d3-44cd-b513-1acc561a0edc.png">
+
+**'최소주문금액'과 '배달팁'의 부담을 줄이기 위한 배달 음식 공동 주문 앱**
+```
+1. 암호화폐를 이용하여 각자 금액만큼 결제
+   - 클레이튼(Klaytn)을 이용해 수수료 감소
+```
+```
+2. 기존의 배달음식 주문 플랫폼 이용 가능
+   - 배달의 민족, 요기요, 쿠팡이츠 등
+```
+```
+3. 배달 음식 수령까지 안전 보장
+   - 도착 확인 버튼, 위치 인식
+```
 
 ## 2. User Interface (UI)
 회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 방 목록&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 방 만들기
@@ -35,9 +43,23 @@ Klip 결제 요청&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 <img width="200" src="https://user-images.githubusercontent.com/38272356/128150715-61781e06-5a64-4143-bf89-896d6919bb17.PNG">&nbsp;&nbsp;&nbsp;
 
 ## 3. 사용방법
-1. 방 생성하기 (방장), 방 참여하기 (참여자)
-2. 준비: 메뉴 선택 및 가격 입력, 결제: 클레이튼 (Klip API)
-3. 수령: 참여자 위치 검증 & 도착 확인 => 방장에게 결제 금액 지급
+```
+1. 방 생성 & 참여
+   - 방장은 음식점, 최소주문금액, 배달팁, 주문 플랫폼, 모집 인원수, 배달 장소 등을 입력.
+   - 참여자들은 방 목록에서 원하는 방을 선택하여 참여.
+```
+```
+2. 준비 & 결제
+   - 각자 주문할 메뉴를 선택하고 가격을 입력.
+   - 채팅을 통해 참여자들끼리 소통 가능.
+   - 모두 준비 완료하면 결제 시작 → 코인원 현재 시세로 '원화(₩) ~ 클레이(KLAY)' 변환 → 카카오톡 내의 Klip으로 이동해 결제.
+```
+```
+3. 수령
+   - 1단계: 참여자가 배달 장소에 도착하면 GPS로 "위치 확인" → 2단계: 방장을 만나면 버튼을 눌러 "도착 확인".
+   - 모든 참여자가 "도착 확인" 되면 방장에게 결제 금액 지급.
+   - 약속 시간을 사전에 지정하여 노쇼 케이스 처리.
+```   
 
 ## 4. 멤버
 김보현: [KBOHYUN](https://github.com/KBOHYUN), 
@@ -45,7 +67,7 @@ Klip 결제 요청&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 임창성: [18changsung](https://github.com/18changsung)
 
 ## 5. 팀 스케쥴
-<img width="1561" alt="image" src="https://user-images.githubusercontent.com/38272356/128143911-8c68781f-8833-48af-aadd-1860e35ede9c.png">
+<img width="750" alt="image" src="https://user-images.githubusercontent.com/38272356/128143911-8c68781f-8833-48af-aadd-1860e35ede9c.png">
 
 ---
 
